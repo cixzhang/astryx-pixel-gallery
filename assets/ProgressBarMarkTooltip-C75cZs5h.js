@@ -1,0 +1,1 @@
+import{n as e,t}from"./index-Rckkpj4n.js";var n=e();function r({content:e,children:r}){return(0,n.jsx)(t,{content:e,placement:`above`,focusTrigger:`always`,children:r})}export{r as default};
