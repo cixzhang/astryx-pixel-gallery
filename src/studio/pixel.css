@@ -384,37 +384,45 @@
   .astryx-card {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
     --astryx-card-padding: var(--spacing-6);
+    --_card-radius: 0px;
   }
 
   .astryx-selectable-card {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
   }
 
   .astryx-clickable-card {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
   }
 
   .astryx-button {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
+    --_button-radius: 0px;
   }
 
   .astryx-toggle-button {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
   }
 
   .astryx-badge {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
     padding: 3px 9px;
     line-height: 1;
@@ -436,48 +444,57 @@
   .astryx-text-input {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
   }
 
   .astryx-text-area {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
   }
 
   .astryx-number-input {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
+    --_field-radius: 0px;
   }
 
   .astryx-date-input {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
   }
 
   .astryx-time-input {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
   }
 
   .astryx-date-time-input {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
   }
 
   .astryx-selector {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
   }
 
   .astryx-selector-popup {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
   }
 
@@ -526,12 +543,15 @@
   .astryx-dialog {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
+    --_dialog-radius: 0px;
   }
 
   .astryx-alert-dialog {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
   }
 
@@ -543,13 +563,16 @@
   .astryx-popover-surface {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
   }
 
   .astryx-hover-card {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
+    --_hovercard-radius: 0px;
   }
 
   .astryx-tooltip {
@@ -560,19 +583,24 @@
   .astryx-toast {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
   }
 
   .astryx-banner {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
+    --_banner-radius: 0px;
   }
 
   .astryx-dropdown-menu {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
+    --_dropdown-menu-radius: 0px;
   }
 
   .astryx-dropdown-menu-item {
@@ -582,12 +610,15 @@
   .astryx-context-menu {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
+    --_dropdown-menu-radius: 0px;
   }
 
   .astryx-code-block {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
   }
 
@@ -608,7 +639,9 @@
   .astryx-segmented-control {
     clip-path: polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel));
     border-width: 0px;
+    border-radius: 0px;
     box-shadow: inset 0 0 0 3px var(--color-border-emphasized);
+    --_segmented-control-radius: 0px;
   }
 
   .astryx-segmented-control-item {

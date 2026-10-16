@@ -251,6 +251,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
         "padding": "var(--spacing-6)"
       }
@@ -259,6 +260,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -266,6 +268,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -273,6 +276,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -280,6 +284,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -287,6 +292,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
         "padding": "3px 9px",
         "lineHeight": "1",
@@ -307,6 +313,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -314,6 +321,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -321,6 +329,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -328,6 +337,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -335,6 +345,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -342,6 +353,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -349,6 +361,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -356,6 +369,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -414,6 +428,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -421,6 +436,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -434,6 +450,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -441,6 +458,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -454,6 +472,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -461,6 +480,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -468,6 +488,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -480,6 +501,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -487,6 +509,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },
@@ -511,6 +534,7 @@ export const pixelTheme = {
       "base": {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
+        "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
       }
     },

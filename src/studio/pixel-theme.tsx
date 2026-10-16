@@ -163,7 +163,12 @@ export function createPixelTheme(pixel = 3, paletteName: PixelPaletteName = 'gar
   const hero = 24 * P;
   const leading = (size: number) => (size + 2 * P) / size;
   const ring = `inset 0 0 0 ${P}px var(--color-border-emphasized)`;
-  const box = {clipPath: pixelCorner, borderWidth: '0px', boxShadow: ring};
+  // borderRadius MUST be 0: the inset ring shadow takes its shape from
+  // the element's border-radius, so a leftover radius token draws a
+  // rounded inner edge inside the stepped clip (the "inner radius"
+  // bug). At radius 0 the ring is a square frame and the clip-path
+  // notches it into a stepped ring of uniform P thickness.
+  const box = {clipPath: pixelCorner, borderWidth: '0px', borderRadius: '0px', boxShadow: ring};
 
   const fontSizeSteps: Record<string, number> = {
     '4xs': 6, '3xs': 7, '2xs': 8, xs: 10, sm: 12, base: 14,
