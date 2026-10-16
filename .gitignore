@@ -1,0 +1,7 @@
+node_modules
+dist
+experiments/*.png
+experiments/avatar-src.jpg
+experiments/fonts
+*.local
+.DS_Store

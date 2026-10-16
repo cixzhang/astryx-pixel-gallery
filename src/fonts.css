@@ -1,0 +1,22 @@
+/* The theme names font families; loading them is the app's job (LEAKAGE #1).
+   Bundled as assets so the gallery renders identically anywhere. */
+@font-face {
+  font-family: 'Silkscreen';
+  src: url('./assets/fonts/silkscreen-400.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Silkscreen';
+  src: url('./assets/fonts/silkscreen-700.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* App chrome: the theme defines --color-background-body but painting the
+   page is the app shell's job (LEAKAGE #5). */
+[data-astryx-theme='pixel'] {
+  background: var(--color-background-body);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+}

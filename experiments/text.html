@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Pixel UI — point sampling, legibility round</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  body { background:#20241f; color:#e8e4d5; font-family: system-ui, sans-serif; margin: 24px; }
+  h1 { font-size: 20px; } h2 { font-size: 14px; margin: 0 0 8px; color:#b7e3a8; font-family: Silkscreen, monospace; }
+  .note { color:#a9a294; font-size: 13px; max-width: 980px; line-height: 1.5; }
+  .grid { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 20px; }
+  .cell { background:#2b302a; padding: 14px; }
+  .verdict { font-size: 12px; color:#c9c2ab; width: 480px; line-height: 1.5; margin-top: 8px; }
+  canvas.gl { width: 480px; height: 360px; display: block; background:#3a4038; }
+  .cluster {
+    width:480px; height:360px; box-sizing:border-box;
+    background:#f4ecd8; border:3px solid #20301f; border-radius:12px;
+    padding:24px; font-family:'Pixelify Sans',monospace; color:#22301f;
+  }
+  .hd { font-size:33px; font-weight:700; margin-bottom:10px; }
+  .l24 { font-size:24px; color:#5a6353; margin-bottom:8px; }
+  .l21 { font-size:21px; color:#5a6353; margin-bottom:8px; }
+  .l18 { font-size:18px; color:#5a6353; margin-bottom:8px; }
+  .l15 { font-size:15px; color:#5a6353; margin-bottom:8px; }
+  .l12 { font-size:12px; color:#5a6353; margin-bottom:12px; }
+  .row { display:flex; gap:18px; align-items:center; }
+  .btn {
+    background:#3e8948; color:#fff; border:3px solid #1d3a1d; border-radius:9px;
+    font-family:inherit; font-size:27px; padding:9px 21px;
+  }
+  .badge {
+    background:#e9b44c; border:3px solid #7a5a14; border-radius:999px;
+    font-size:21px; padding:3px 15px;
+  }
+  .avatar { width:54px; height:54px; border-radius:50%; object-fit:cover; flex:none; }
+  /* dilated variant: every text element gets a same-colour stroke,
+     fattening glyph strokes ~0.8px in the SOURCE raster */
+  .dil .hd { -webkit-text-stroke: 0.8px #22301f; }
+  .dil .l24, .dil .l21, .dil .l18, .dil .l15, .dil .l12 { -webkit-text-stroke: 0.8px #5a6353; }
+  .dil .btn { -webkit-text-stroke: 0.8px #ffffff; }
+  .dil .badge { -webkit-text-stroke: 0.6px #22301f; }
+  .lock .hd { line-height: 39px; margin-bottom: 9px; }
+  .lock .l24 { line-height: 30px; margin-bottom: 9px; }
+  .lock .l21 { line-height: 24px; margin-bottom: 9px; }
+  .lock .l18 { line-height: 21px; margin-bottom: 9px; }
+  .lock .l15 { line-height: 18px; margin-bottom: 9px; }
+  .lock .l12 { line-height: 15px; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+<h1>Pixel UI — point sampling, but legible (no dithering, no averaging)</h1>
+<p class="note">Cindy's verdict: no dithering; point sampling has the best pixelated look but loses font
+legibility. So both fixes below keep <b>pure point sampling</b> — every output cell is one real source
+texel, never a blend. <b>H2</b> changes <i>which</i> texel: of the cell's 3×3 source texels it picks the one
+farthest from the cell mean (max-contrast / ink-priority), so a thin stroke inside a cell wins the cell.
+<b>H3</b> changes the <i>source</i>: text gets a same-colour <code>-webkit-text-stroke</code>, fattening
+strokes before sampling. The sentence ladder (24/21/18/15/12px) shows where legibility breaks.</p>
+
+<h2>CAPTURE A — plain source</h2>
+<canvas id="capA" layoutsubtree width="480" height="360" style="width:480px;height:360px;background:#444">
+  <div class="cluster" id="elA" layoutsubtree>
+    <div class="hd">Repo Garden</div>
+    <div class="l24">Water the wilting plants first.</div>
+    <div class="l21">Water the wilting plants first.</div>
+    <div class="l18">Water the wilting plants first.</div>
+    <div class="l15">Water the wilting plants first.</div>
+    <div class="l12">Water the wilting plants first.</div>
+    <div class="row">
+      <button class="btn">Harvest</button>
+      <span class="badge">+3 plots</span>
+      <img class="avatar" src="avatar-src.jpg" />
+    </div>
+  </div>
+</canvas>
+
+<h2 style="margin-top:26px">CAPTURE B — stroke-dilated source</h2>
+<canvas id="capB" layoutsubtree width="480" height="360" style="width:480px;height:360px;background:#444">
+  <div class="cluster dil" id="elB" layoutsubtree>
+    <div class="hd">Repo Garden</div>
+    <div class="l24">Water the wilting plants first.</div>
+    <div class="l21">Water the wilting plants first.</div>
+    <div class="l18">Water the wilting plants first.</div>
+    <div class="l15">Water the wilting plants first.</div>
+    <div class="l12">Water the wilting plants first.</div>
+    <div class="row">
+      <button class="btn">Harvest</button>
+      <span class="badge">+3 plots</span>
+      <img class="avatar" src="avatar-src.jpg" />
+    </div>
+  </div>
+</canvas>
+
+<h2 style="margin-top:26px">CAPTURE C — dilated + grid-locked type (line-heights & margins in multiples of 3px)</h2>
+<canvas id="capC" layoutsubtree width="480" height="360" style="width:480px;height:360px;background:#444">
+  <div class="cluster dil lock" id="elC" layoutsubtree>
+    <div class="hd">Repo Garden</div>
+    <div class="l24">Water the wilting plants first.</div>
+    <div class="l21">Water the wilting plants first.</div>
+    <div class="l18">Water the wilting plants first.</div>
+    <div class="l15">Water the wilting plants first.</div>
+    <div class="l12">Water the wilting plants first.</div>
+    <div class="row">
+      <button class="btn">Harvest</button>
+      <span class="badge">+3 plots</span>
+      <img class="avatar" src="avatar-src.jpg" />
+    </div>
+  </div>
+</canvas>
+<div id="status" style="font-family:monospace;font-size:13px;color:#b7e3a8;margin-top:8px">waiting for paint…</div>
+
+<div class="grid">
+  <div class="cell">
+    <h2>H1 — plain source, centre point sample (round 3's G1)</h2>
+    <canvas class="gl" id="h1" width="480" height="360"></canvas>
+    <p class="verdict">Baseline: strokes thinner than a cell survive only when the centre texel happens to land on them.</p>
+  </div>
+  <div class="cell">
+    <h2>H2 — plain source, max-contrast texel</h2>
+    <canvas class="gl" id="h2" width="480" height="360"></canvas>
+    <p class="verdict">Per cell: mean the 3×3 texels; if any texel deviates strongly, output the most deviant one — ink wins its cell. Polarity-free: works for dark-on-light and white-on-green. Output colours are still only real source texels.</p>
+  </div>
+  <div class="cell">
+    <h2>H3 — dilated source, centre point sample</h2>
+    <canvas class="gl" id="h3" width="480" height="360"></canvas>
+    <p class="verdict">Strokes are ~1.6px wider in the source, so centre sampling lands on ink far more often. Cost: type looks bolder everywhere, including at native size if the same DOM were shown directly.</p>
+  </div>
+  <div class="cell">
+    <h2>H4 — dilated source + max-contrast texel</h2>
+    <canvas class="gl" id="h4" width="480" height="360"></canvas>
+    <p class="verdict">Both fixes stacked. If H2 alone is enough, this is overkill; if small sizes still break, this is the floor.</p>
+  </div>
+  <div class="cell">
+    <h2>H5 — grid-locked dilated source, centre point</h2>
+    <canvas class="gl" id="h5" width="480" height="360"></canvas>
+    <p class="verdict">Every baseline sits at the same phase of the sampling grid, because every vertical metric is a multiple of the cell. One phase, shared by all lines.</p>
+  </div>
+  <div class="cell">
+    <h2>H6 — H5 with sample phase shifted +1 texel (y)</h2>
+    <canvas class="gl" id="h6" width="480" height="360"></canvas>
+    <p class="verdict">Same source as H5, sampling grid shifted by one source texel. Shows how much of point sampling's damage is pure phase luck.</p>
+  </div>
+</div>
+
+<script>
+const VERT = `#version 300 es
+layout(location=0) in vec2 aPos;
+out vec2 vUv;
+void main(){ vUv = aPos * 0.5 + 0.5; gl_Position = vec4(aPos, 0.0, 1.0); }`;
+
+const FRAG = `#version 300 es
+precision highp float;
+uniform sampler2D uTex;
+uniform vec2 uGrid;
+uniform vec2 uTexSize;
+uniform int uMode;   // 1 = centre point, 2 = max-contrast texel
+uniform ivec2 uPhase;
+in vec2 vUv;
+out vec4 fragColor;
+float dist2(vec3 a, vec3 b){
+  float rm = (a.r + b.r) * 0.5;
+  vec3 d = a - b;
+  return (2.0 + rm) * d.r * d.r + 4.0 * d.g * d.g + (3.0 - rm) * d.b * d.b;
+}
+void main(){
+  vec2 cell = floor(vUv * uGrid);
+  ivec2 base = ivec2(cell * (uTexSize / uGrid));
+  ivec2 centre = base + ivec2(1, 1) + uPhase;
+  vec3 c = texelFetch(uTex, centre, 0).rgb;
+  if (uMode == 2) {
+    vec3 mean = vec3(0.0);
+    for (int dy = 0; dy < 3; dy++)
+      for (int dx = 0; dx < 3; dx++)
+        mean += texelFetch(uTex, base + ivec2(dx, dy), 0).rgb;
+    mean /= 9.0;
+    float bd = dist2(c, mean);
+    for (int dy = 0; dy < 3; dy++)
+      for (int dx = 0; dx < 3; dx++) {
+        vec3 t = texelFetch(uTex, base + ivec2(dx, dy), 0).rgb;
+        float d = dist2(t, mean);
+        if (d > bd) { bd = d; c = t; }
+      }
+    if (bd < 0.004) c = texelFetch(uTex, centre, 0).rgb;
+  }
+  fragColor = vec4(c, 1.0);
+}`;
+
+function makePanel(id, mode, phase) {
+  const cv = document.getElementById(id);
+  const gl = cv.getContext('webgl2');
+  const sh = (type, src) => {
+    const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.log(id, gl.getShaderInfoLog(s));
+    return s;
+  };
+  const prog = gl.createProgram();
+  gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT));
+  gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG));
+  gl.linkProgram(prog); gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(0);
+  gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+  const tex = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, tex);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+  gl.uniform1i(gl.getUniformLocation(prog, 'uTex'), 0);
+  gl.uniform2f(gl.getUniformLocation(prog, 'uGrid'), 160, 120);
+  gl.uniform2f(gl.getUniformLocation(prog, 'uTexSize'), 480, 360);
+  gl.uniform1i(gl.getUniformLocation(prog, 'uMode'), mode);
+  gl.uniform2i(gl.getUniformLocation(prog, 'uPhase'), phase ? phase[0] : 0, phase ? phase[1] : 0);
+  return { gl, tex };
+}
+
+const caps = [
+  { canvas: document.getElementById('capA'), el: document.getElementById('elA') },
+  { canvas: document.getElementById('capB'), el: document.getElementById('elB') },
+  { canvas: document.getElementById('capC'), el: document.getElementById('elC') },
+];
+const panels = [
+  { ...makePanel('h1', 1), cap: 0 },
+  { ...makePanel('h2', 2), cap: 0 },
+  { ...makePanel('h3', 1), cap: 1 },
+  { ...makePanel('h4', 2), cap: 1 },
+  { ...makePanel('h5', 1), cap: 2 },
+  { ...makePanel('h6', 1, [0, 1]), cap: 2 },
+];
+const status = document.getElementById('status');
+let paints = 0;
+
+function drawAll() {
+  for (const c of caps) {
+    try {
+      const ctx = c.canvas.getContext('2d');
+      ctx.reset && ctx.reset();
+      ctx.drawElementImage(c.el, 0, 0);
+    } catch (e) { status.textContent = 'draw error: ' + e.message; return; }
+  }
+  paints++;
+  for (const p of panels) {
+    p.gl.bindTexture(p.gl.TEXTURE_2D, p.tex);
+    p.gl.pixelStorei(p.gl.UNPACK_FLIP_Y_WEBGL, true);
+    p.gl.texImage2D(p.gl.TEXTURE_2D, 0, p.gl.RGBA, p.gl.RGBA, p.gl.UNSIGNED_BYTE, caps[p.cap].canvas);
+    p.gl.drawArrays(p.gl.TRIANGLE_STRIP, 0, 4);
+  }
+  status.textContent = 'paints: ' + paints + ' · point sampling only — no averaging, no dithering';
+  window.__paints = paints;
+}
+
+let armed = 0;
+for (const c of caps) {
+  if ('requestPaint' in c.canvas) {
+    c.canvas.addEventListener('paint', () => { armed++; if (armed >= 1) drawAll(); });
+    c.canvas.requestPaint();
+    setTimeout(() => c.canvas.requestPaint(), 500);
+    setTimeout(() => c.canvas.requestPaint(), 1200);
+  }
+}
+</script>
+</body>
+</html>

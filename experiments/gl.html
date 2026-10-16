@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Pixel UI — drawElement + WebGL shader pixelation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  body { background:#20241f; color:#e8e4d5; font-family: system-ui, sans-serif; margin: 24px; }
+  h1 { font-size: 20px; } h2 { font-size: 14px; margin: 0 0 8px; color:#b7e3a8; font-family: Silkscreen, monospace; }
+  .note { color:#a9a294; font-size: 13px; max-width: 980px; line-height: 1.5; }
+  .grid { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 20px; }
+  .cell { background:#2b302a; padding: 14px; }
+  .verdict { font-size: 12px; color:#c9c2ab; width: 480px; line-height: 1.5; margin-top: 8px; }
+  canvas.gl { width: 480px; height: 360px; display: block; background:#3a4038; }
+</style>
+</head>
+<body>
+<h1>Pixel UI — drawElementImage → WebGL shader pixelation</h1>
+<p class="note">The DOM cluster (native 3× design, with photo avatar) is rasterised ONCE by
+<code>drawElementImage</code> into a capture canvas at full 480×360. Each panel below is a WebGL canvas
+texturing that capture and resampling it in a fragment shader onto a 160×120 pixel grid —
+the shader, not the browser's compositor, decides what a "pixel" is. Grid = 160×120, pixel unit = 3px.</p>
+
+<!-- Capture canvas: children with layoutsubtree are the DOM source.
+     It is also displayed (small) so the harness can screenshot the raw capture. -->
+<h2>CAPTURE — drawElementImage target (480×360 backing, shown 1:1)</h2>
+<canvas id="capture" layoutsubtree width="480" height="360" style="width:480px;height:360px;background:#444">
+  <div id="el" layoutsubtree style="width:480px;height:360px;box-sizing:border-box;background:#f4ecd8;border:3px solid #20301f;border-radius:12px;padding:24px;font-family:'Pixelify Sans',monospace;color:#22301f">
+    <div style="font-size:33px;font-weight:700;margin-bottom:12px">Repo Garden</div>
+    <div style="font-size:24px;color:#5a6353;line-height:1.45;margin-bottom:18px">Three plots are ready to harvest. CI is green on the world tree.</div>
+    <div style="display:flex;gap:18px;align-items:center;margin-bottom:18px">
+      <button style="background:#3e8948;color:#fff;border:3px solid #1d3a1d;border-radius:9px;font-family:inherit;font-size:27px;padding:9px 21px">Harvest</button>
+      <span style="background:#e9b44c;border:3px solid #7a5a14;border-radius:999px;font-size:21px;padding:3px 15px">+3 plots</span>
+      <img src="avatar-src.jpg" style="width:54px;height:54px;border-radius:50%;object-fit:cover;flex:none" />
+    </div>
+    <div style="display:flex;gap:18px;align-items:center">
+      <input value="tend the garden" style="width:264px;font-family:inherit;font-size:24px;padding:6px 12px;border:3px solid #20301f;border-radius:6px;background:#fffdf4;color:#22301f" />
+      <svg width="78" height="48" viewBox="0 0 26 16"><line x1="1" y1="15" x2="25" y2="1" stroke="#22301f" stroke-width="1"/><circle cx="13" cy="8" r="6" fill="none" stroke="#b3541e" stroke-width="1"/></svg>
+    </div>
+  </div>
+</canvas>
+<div id="status" style="font-family:monospace;font-size:13px;color:#b7e3a8;margin-top:8px">waiting for paint…</div>
+
+<div class="grid">
+  <div class="cell">
+    <h2>G0 — passthrough (LINEAR, no grid)</h2>
+    <canvas class="gl" id="g0" width="480" height="360"></canvas>
+    <p class="verdict">Control: the capture, sampled smoothly. This is the blurry baseline Cindy flagged.</p>
+  </div>
+  <div class="cell">
+    <h2>G1 — shader grid, point sample (NEAREST at cell centre)</h2>
+    <canvas class="gl" id="g1" width="480" height="360"></canvas>
+    <p class="verdict">UV snapped to the 160×120 grid, one point sample per cell. Hard blocks by construction.</p>
+  </div>
+  <div class="cell">
+    <h2>G2 — shader grid, mip-average sample</h2>
+    <canvas class="gl" id="g2" width="480" height="360"></canvas>
+    <p class="verdict">Same grid, but the sample is a mip-level average over the cell (textureLod ≈ log2(3)) —
+    the GPU version of R1's averaging, per frame, no 120ms capture.</p>
+  </div>
+  <div class="cell">
+    <h2>G3 — G2 + palette posterise (6 levels/channel)</h2>
+    <canvas class="gl" id="g3" width="480" height="360"></canvas>
+    <p class="verdict">Averaged grid sample, then colour quantised. The retro-hardware finish: limited palette, no AA greys at edges.</p>
+  </div>
+</div>
+
+<script>
+const capture = document.getElementById('capture');
+const cctx = capture.getContext('2d');
+const el = document.getElementById('el');
+const status = document.getElementById('status');
+
+const VERT = `#version 300 es
+layout(location=0) in vec2 aPos;
+out vec2 vUv;
+void main(){ vUv = aPos * 0.5 + 0.5; gl_Position = vec4(aPos, 0.0, 1.0); }`;
+
+const FRAG = `#version 300 es
+precision highp float;
+uniform sampler2D uTex;
+uniform vec2 uGrid;
+uniform int uMode;      // 0 passthrough, 1 point, 2 mip-average, 3 posterise
+uniform float uLod;
+uniform float uLevels;
+in vec2 vUv;
+out vec4 fragColor;
+void main(){
+  vec3 c;
+  if (uMode == 0) {
+    c = texture(uTex, vUv).rgb;
+  } else {
+    vec2 cellUv = (floor(vUv * uGrid) + 0.5) / uGrid;
+    if (uMode == 1) {
+      c = texture(uTex, cellUv).rgb;
+    } else {
+      c = textureLod(uTex, cellUv, uLod).rgb;
+      if (uMode == 3) {
+        c = floor(c * (uLevels - 1.0) + 0.5) / (uLevels - 1.0);
+      }
+    }
+  }
+  fragColor = vec4(c, 1.0);
+}`;
+
+function makePanel(id, mode) {
+  const cv = document.getElementById(id);
+  const gl = cv.getContext('webgl2');
+  if (!gl) return null;
+  const sh = (type, src) => {
+    const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.log(id, gl.getShaderInfoLog(s));
+    return s;
+  };
+  const prog = gl.createProgram();
+  gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT));
+  gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG));
+  gl.linkProgram(prog); gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(0);
+  gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+  const tex = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, tex);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER,
+    mode >= 2 ? gl.LINEAR_MIPMAP_LINEAR : gl.NEAREST);
+  gl.uniform1i(gl.getUniformLocation(prog, 'uTex'), 0);
+  gl.uniform2f(gl.getUniformLocation(prog, 'uGrid'), 160, 120);
+  gl.uniform1i(gl.getUniformLocation(prog, 'uMode'), mode);
+  gl.uniform1f(gl.getUniformLocation(prog, 'uLod'), Math.log2(3));
+  gl.uniform1f(gl.getUniformLocation(prog, 'uLevels'), 6.0);
+  return { gl, tex, mode };
+}
+
+const panels = [makePanel('g0', 0), makePanel('g1', 1), makePanel('g2', 2), makePanel('g3', 3)];
+let paints = 0;
+
+function drawAll() {
+  try {
+    cctx.reset && cctx.reset();
+    cctx.drawElementImage(el, 0, 0);
+  } catch (e) {
+    status.textContent = 'drawElementImage error: ' + e.message;
+    return;
+  }
+  paints++;
+  for (const p of panels) {
+    if (!p) continue;
+    const { gl, tex, mode } = p;
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, capture);
+    if (mode >= 2) gl.generateMipmap(gl.TEXTURE_2D);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  }
+  status.textContent = 'paints: ' + paints + ' · texture source: drawElementImage capture 480×360 · grid 160×120';
+  window.__paints = paints;
+}
+
+if ('requestPaint' in capture) {
+  capture.addEventListener('paint', drawAll);
+  capture.requestPaint();
+  // fonts settle late; repaint a few times
+  setTimeout(() => capture.requestPaint(), 500);
+  setTimeout(() => capture.requestPaint(), 1200);
+} else {
+  status.textContent = 'requestPaint unavailable';
+}
+</script>
+</body>
+</html>

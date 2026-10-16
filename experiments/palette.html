@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Pixel UI — curated palette shader + dithering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  body { background:#20241f; color:#e8e4d5; font-family: system-ui, sans-serif; margin: 24px; }
+  h1 { font-size: 20px; } h2 { font-size: 14px; margin: 0 0 8px; color:#b7e3a8; font-family: Silkscreen, monospace; }
+  .note { color:#a9a294; font-size: 13px; max-width: 980px; line-height: 1.5; }
+  .grid { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 20px; }
+  .cell { background:#2b302a; padding: 14px; }
+  .verdict { font-size: 12px; color:#c9c2ab; width: 480px; line-height: 1.5; margin-top: 8px; }
+  canvas.gl { width: 480px; height: 360px; display: block; background:#3a4038; }
+</style>
+</head>
+<body>
+<h1>Pixel UI — curated palette + ordered dithering</h1>
+<p class="note">Round 3's G3 failed because uniform per-channel posterise rounds each channel
+independently and shifts hues. Here every grid cell's <i>averaged</i> colour (the G2 sample) is mapped to the
+<b>nearest colour in a curated palette</b> — the palette below, which pins the UI's own flat design colours
+exactly, so flat areas map 1:1 with zero shift. Photos and AA gradients quantise to the palette's tones;
+Bayer 8×8 ordered dithering hides the banding. The palette is data: one JS array feeds both the shader
+uniform and the swatch strip.</p>
+<div id="swatches" style="display:flex;flex-wrap:wrap;gap:4px;max-width:1008px;margin:10px 0"></div>
+
+<!-- Capture canvas: children with layoutsubtree are the DOM source.
+     It is also displayed (small) so the harness can screenshot the raw capture. -->
+<h2>CAPTURE — drawElementImage target (480×360 backing, shown 1:1)</h2>
+<canvas id="capture" layoutsubtree width="480" height="360" style="width:480px;height:360px;background:#444">
+  <div id="el" layoutsubtree style="width:480px;height:360px;box-sizing:border-box;background:#f4ecd8;border:3px solid #20301f;border-radius:12px;padding:24px;font-family:'Pixelify Sans',monospace;color:#22301f">
+    <div style="font-size:33px;font-weight:700;margin-bottom:12px">Repo Garden</div>
+    <div style="font-size:24px;color:#5a6353;line-height:1.45;margin-bottom:18px">Three plots are ready to harvest. CI is green on the world tree.</div>
+    <div style="display:flex;gap:18px;align-items:center;margin-bottom:18px">
+      <button style="background:#3e8948;color:#fff;border:3px solid #1d3a1d;border-radius:9px;font-family:inherit;font-size:27px;padding:9px 21px">Harvest</button>
+      <span style="background:#e9b44c;border:3px solid #7a5a14;border-radius:999px;font-size:21px;padding:3px 15px">+3 plots</span>
+      <img src="avatar-src.jpg" style="width:54px;height:54px;border-radius:50%;object-fit:cover;flex:none" />
+    </div>
+    <div style="display:flex;gap:18px;align-items:center">
+      <input value="tend the garden" style="width:264px;font-family:inherit;font-size:24px;padding:6px 12px;border:3px solid #20301f;border-radius:6px;background:#fffdf4;color:#22301f" />
+      <svg width="78" height="48" viewBox="0 0 26 16"><line x1="1" y1="15" x2="25" y2="1" stroke="#22301f" stroke-width="1"/><circle cx="13" cy="8" r="6" fill="none" stroke="#b3541e" stroke-width="1"/></svg>
+    </div>
+  </div>
+</canvas>
+<div id="status" style="font-family:monospace;font-size:13px;color:#b7e3a8;margin-top:8px">waiting for paint…</div>
+
+<div class="grid">
+  <div class="cell">
+    <h2>G2 reference — mip-average, no palette</h2>
+    <canvas class="gl" id="g2" width="480" height="360"></canvas>
+    <p class="verdict">The best non-palette result from round 3: perfect grid, averaged colours, unlimited palette (AA greys everywhere).</p>
+  </div>
+  <div class="cell">
+    <h2>G4 — curated palette, nearest colour, no dither</h2>
+    <canvas class="gl" id="g4" width="480" height="360"></canvas>
+    <p class="verdict">Flat UI colours should be pixel-exact (they are in the palette). Gradients/photo areas snap to palette tones — watch for banding.</p>
+  </div>
+  <div class="cell">
+    <h2>G5 — curated palette + Bayer dither (0.15)</h2>
+    <canvas class="gl" id="g5" width="480" height="360"></canvas>
+    <p class="verdict">The averaged colour is offset by the Bayer threshold before the nearest-colour lookup, so neighbouring cells pick neighbouring palette entries and gradients dissolve into pattern instead of bands.</p>
+  </div>
+  <div class="cell">
+    <h2>G6 — curated palette + Bayer dither (0.30)</h2>
+    <canvas class="gl" id="g6" width="480" height="360"></canvas>
+    <p class="verdict">Double the dither amplitude: smoother gradients, but flat areas and text edges may start to sparkle. The dose is the question.</p>
+  </div>
+  <div class="cell">
+    <h2>G7 — palette + distance-gated dither (0.30, gated)</h2>
+    <canvas class="gl" id="g7" width="480" height="360"></canvas>
+    <p class="verdict">The fix for G5/G6's speckle: dither amplitude is multiplied by how far the averaged colour
+    sits from the nearest palette entry. Flat UI colours are already in the palette (distance ~0 → no dither, no speckle);
+    only genuine gradient/photo cells — the avatar — get the full dither.</p>
+  </div>
+</div>
+
+<script>
+const capture = document.getElementById('capture');
+const cctx = capture.getContext('2d');
+const el = document.getElementById('el');
+const status = document.getElementById('status');
+
+const VERT = `#version 300 es
+layout(location=0) in vec2 aPos;
+out vec2 vUv;
+void main(){ vUv = aPos * 0.5 + 0.5; gl_Position = vec4(aPos, 0.0, 1.0); }`;
+
+const PALETTE_HEX = [
+  // pinned: the UI's own flat design colours (map 1:1, zero shift)
+  '#F4ECD8', '#FFFDF4', '#FFFFFF', '#22301F', '#1D3A1D', '#3E8948',
+  '#5A6353', '#E9B44C', '#7A5A14', '#E07A3F', '#B3541E',
+  // garden mids — for AA edges and averaged gradients
+  '#8FAE94', '#CACCBB', '#A8A384', '#898264', '#D9D0B4', '#387B40', '#EBC67C',
+  // photo / avatar tones (extracted from the avatar photo, median-cut)
+  '#B49E7E', '#764D1D', '#95692B', '#1A0E08', '#3D2A1A', '#B0873D',
+  '#C0CCD6', '#BEB6AC', '#F2C29B', '#D99E6A',
+];
+const PALETTE = PALETTE_HEX.map(h => [
+  parseInt(h.slice(1, 3), 16) / 255,
+  parseInt(h.slice(3, 5), 16) / 255,
+  parseInt(h.slice(5, 7), 16) / 255,
+]);
+// swatch strip from the same data the shader gets
+document.getElementById('swatches').innerHTML = PALETTE_HEX.map(h =>
+  `<span title="${h}" style="width:30px;height:30px;background:${h};display:inline-block"></span>`).join('');
+
+const FRAG = `#version 300 es
+precision highp float;
+uniform sampler2D uTex;
+uniform vec2 uGrid;
+uniform int uMode;        // 2 = mip-average reference, 4/5/6 = palette (+dither)
+uniform float uLod;
+uniform float uDither;    // 0, 0.15, 0.30
+uniform vec3 uPalette[${28}];
+in vec2 vUv;
+out vec4 fragColor;
+const float BAYER[64] = float[64](
+  0.0/64.0, 32.0/64.0, 8.0/64.0, 40.0/64.0, 2.0/64.0, 34.0/64.0, 10.0/64.0, 42.0/64.0,
+  48.0/64.0, 16.0/64.0, 56.0/64.0, 24.0/64.0, 50.0/64.0, 18.0/64.0, 58.0/64.0, 26.0/64.0,
+  12.0/64.0, 44.0/64.0, 4.0/64.0, 36.0/64.0, 14.0/64.0, 46.0/64.0, 6.0/64.0, 38.0/64.0,
+  60.0/64.0, 28.0/64.0, 52.0/64.0, 20.0/64.0, 62.0/64.0, 30.0/64.0, 54.0/64.0, 22.0/64.0,
+  3.0/64.0, 35.0/64.0, 11.0/64.0, 43.0/64.0, 1.0/64.0, 33.0/64.0, 9.0/64.0, 41.0/64.0,
+  51.0/64.0, 19.0/64.0, 59.0/64.0, 27.0/64.0, 49.0/64.0, 17.0/64.0, 57.0/64.0, 25.0/64.0,
+  15.0/64.0, 47.0/64.0, 7.0/64.0, 39.0/64.0, 13.0/64.0, 45.0/64.0, 5.0/64.0, 37.0/64.0,
+  63.0/64.0, 31.0/64.0, 55.0/64.0, 23.0/64.0, 61.0/64.0, 29.0/64.0, 53.0/64.0, 21.0/64.0
+);
+float distRedmean(vec3 a, vec3 b){
+  float rm = (a.r + b.r) * 0.5;
+  vec3 d = a - b;
+  return (2.0 + rm) * d.r * d.r + 4.0 * d.g * d.g + (3.0 - rm) * d.b * d.b;
+}
+vec3 nearestPalette(vec3 c){
+  vec3 best = uPalette[0];
+  float bd = distRedmean(c, best);
+  for (int i = 1; i < ${28}; i++) {
+    float d = distRedmean(c, uPalette[i]);
+    if (d < bd) { bd = d; best = uPalette[i]; }
+  }
+  return best;
+}
+void main(){
+  vec2 cell = floor(vUv * uGrid);
+  vec2 cellUv = (cell + 0.5) / uGrid;
+  vec3 avg = textureLod(uTex, cellUv, uLod).rgb;
+  if (uMode == 2) { fragColor = vec4(avg, 1.0); return; }
+  vec3 c = avg;
+  if (uMode == 7) {
+    float d0 = distRedmean(c, nearestPalette(c));
+    float gate = smoothstep(0.0005, 0.012, d0);
+    int idx = int(mod(cell.y, 8.0)) * 8 + int(mod(cell.x, 8.0));
+    float t = BAYER[idx] - 0.5;
+    fragColor = vec4(nearestPalette(clamp(c + t * uDither * gate, 0.0, 1.0)), 1.0);
+    return;
+  }
+  if (uDither > 0.0) {
+    int idx = int(mod(cell.y, 8.0)) * 8 + int(mod(cell.x, 8.0));
+    float t = BAYER[idx] - 0.5;
+    c = clamp(c + t * uDither, 0.0, 1.0);
+  }
+  fragColor = vec4(nearestPalette(c), 1.0);
+}`;
+
+function makePanel(id, mode, dither) {
+  const cv = document.getElementById(id);
+  const gl = cv.getContext('webgl2');
+  if (!gl) return null;
+  const sh = (type, src) => {
+    const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.log(id, gl.getShaderInfoLog(s));
+    return s;
+  };
+  const prog = gl.createProgram();
+  gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT));
+  gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG));
+  gl.linkProgram(prog); gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(0);
+  gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+  const tex = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, tex);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+  gl.uniform1i(gl.getUniformLocation(prog, 'uTex'), 0);
+  gl.uniform2f(gl.getUniformLocation(prog, 'uGrid'), 160, 120);
+  gl.uniform1i(gl.getUniformLocation(prog, 'uMode'), mode);
+  gl.uniform1f(gl.getUniformLocation(prog, 'uLod'), Math.log2(3));
+  gl.uniform1f(gl.getUniformLocation(prog, 'uDither'), dither);
+  const loc = gl.getUniformLocation(prog, 'uPalette');
+  if (loc) {
+    const flat = new Float32Array(28 * 3);
+    PALETTE.forEach((c, i) => { flat[i * 3] = c[0]; flat[i * 3 + 1] = c[1]; flat[i * 3 + 2] = c[2]; });
+    gl.uniform3fv(loc, flat);
+  }
+  return { gl, tex, mode };
+}
+
+const panels = [makePanel('g2', 2, 0), makePanel('g4', 4, 0), makePanel('g5', 5, 0.15), makePanel('g6', 6, 0.30), makePanel('g7', 7, 0.30)];
+let paints = 0;
+
+function drawAll() {
+  try {
+    cctx.reset && cctx.reset();
+    cctx.drawElementImage(el, 0, 0);
+  } catch (e) {
+    status.textContent = 'drawElementImage error: ' + e.message;
+    return;
+  }
+  paints++;
+  for (const p of panels) {
+    if (!p) continue;
+    const { gl, tex, mode } = p;
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, capture);
+    gl.generateMipmap(gl.TEXTURE_2D);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  }
+  status.textContent = 'paints: ' + paints + ' · texture source: drawElementImage capture 480×360 · grid 160×120';
+  window.__paints = paints;
+}
+
+if ('requestPaint' in capture) {
+  capture.addEventListener('paint', drawAll);
+  capture.requestPaint();
+  // fonts settle late; repaint a few times
+  setTimeout(() => capture.requestPaint(), 500);
+  setTimeout(() => capture.requestPaint(), 1200);
+} else {
+  status.textContent = 'requestPaint unavailable';
+}
+</script>
+</body>
+</html>

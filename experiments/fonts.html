@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Pixel UI — grid-native pixel fonts as source</title>
+<style>
+  @font-face { font-family: 'Silkscreen'; src: url('fonts/silkscreen.ttf') format('truetype'); font-weight: 400; }
+  @font-face { font-family: 'PressStart'; src: url('fonts/pressstart.ttf') format('truetype'); }
+  @font-face { font-family: 'Cozette'; src: url('fonts/cozette.ttf') format('truetype'); }
+  body { background:#20241f; color:#e8e4d5; font-family: system-ui, sans-serif; margin: 24px; }
+  h1 { font-size: 20px; } h2 { font-size: 14px; margin: 0 0 8px; color:#b7e3a8; font-family: Silkscreen, monospace; }
+  .note { color:#a9a294; font-size: 13px; max-width: 980px; line-height: 1.5; }
+  .grid { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 20px; }
+  .cell { background:#2b302a; padding: 14px; }
+  .verdict { font-size: 12px; color:#c9c2ab; width: 480px; line-height: 1.5; margin-top: 8px; }
+  canvas.gl { width: 480px; height: 240px; display: block; background:#3a4038; }
+  .cluster {
+    width:480px; height:240px; box-sizing:border-box;
+    background:#f4ecd8; border:3px solid #20301f; border-radius:12px;
+    padding:24px; color:#22301f;
+  }
+  .s24 { font-size:24px; line-height:30px; margin-bottom:9px; color:#22301f; }
+  .s16 { font-size:16px; line-height:21px; margin-bottom:9px; color:#5a6353; }
+  .s12 { font-size:12px; line-height:15px; margin-bottom:12px; color:#5a6353; }
+  .row { display:flex; gap:18px; align-items:center; }
+  .btn {
+    background:#3e8948; color:#fff; border:3px solid #1d3a1d; border-radius:9px;
+    font-family:inherit; font-size:16px; padding:6px 12px;
+  }
+  .badge {
+    background:#e9b44c; border:3px solid #7a5a14; border-radius:999px;
+    font-size:16px; padding:3px 12px; color:#22301f;
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+<h1>Pixel UI — grid-native pixel fonts as the source (point sampling, NO dilation)</h1>
+<p class="note">Measured from the font files: <b>Silkscreen</b> and <b>Press Start 2P</b> draw on a true design
+grid of size/8 — at font-size 24 their design pixel is exactly 3px = one output cell; at 16 it's 2px.
+<b>Cozette</b>'s TTF is the <i>Vector</i> remaster: glyph coordinates have GCD 1 — no design grid at all.
+<b>Pixelify Sans</b> is the round-5 control. All lines grid-locked (line-heights in multiples of 3),
+centre point sampling, no dilation, no averaging.</p>
+
+<div id="captures"></div>
+<div id="status" style="font-family:monospace;font-size:13px;color:#b7e3a8;margin-top:8px">waiting for paint…</div>
+<div class="grid" id="panels"></div>
+
+<script>
+const FONTS = [
+  { id: 'silk', name: 'Silkscreen — design pixel = size/8', family: "'Silkscreen', monospace" },
+  { id: 'ps2p', name: 'Press Start 2P — design pixel = size/8', family: "'PressStart', monospace" },
+  { id: 'coz', name: 'Cozette Vector — no design grid (GCD 1)', family: "'Cozette', monospace" },
+  { id: 'pix', name: 'Pixelify Sans — control (round 5 font)', family: "'Pixelify Sans', monospace" },
+];
+const capturesEl = document.getElementById('captures');
+const panelsEl = document.getElementById('panels');
+for (const f of FONTS) {
+  const wrap = document.createElement('div');
+  wrap.innerHTML = `
+    <h2 style="margin-top:22px">SOURCE — ${f.name}</h2>
+    <canvas id="cap-${f.id}" layoutsubtree width="480" height="240" style="width:480px;height:240px;background:#444">
+      <div class="cluster" id="el-${f.id}" layoutsubtree style="font-family:${f.family}">
+        <div class="s24">Water the wilting plants first.</div>
+        <div class="s16">Water the wilting plants first.</div>
+        <div class="s12">Water the wilting plants first.</div>
+        <div class="row">
+          <button class="btn">Harvest</button>
+          <span class="badge">+3 plots</span>
+          <img src="avatar-src.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none" />
+        </div>
+      </div>
+    </canvas>`;
+  capturesEl.appendChild(wrap);
+  const cell = document.createElement('div');
+  cell.className = 'cell';
+  cell.innerHTML = `<h2>${f.name}</h2><canvas class="gl" id="gl-${f.id}" width="480" height="240"></canvas>
+    <p class="verdict">Point-sampled at cell 3px. The 24px line is the grid-matched case for the two grid-native fonts.</p>`;
+  panelsEl.appendChild(cell);
+}
+
+const VERT = `#version 300 es
+layout(location=0) in vec2 aPos;
+out vec2 vUv;
+void main(){ vUv = aPos * 0.5 + 0.5; gl_Position = vec4(aPos, 0.0, 1.0); }`;
+const FRAG = `#version 300 es
+precision highp float;
+uniform sampler2D uTex;
+uniform vec2 uGrid;
+in vec2 vUv;
+out vec4 fragColor;
+void main(){
+  vec2 cellUv = (floor(vUv * uGrid) + 0.5) / uGrid;
+  fragColor = vec4(texture(uTex, cellUv).rgb, 1.0);
+}`;
+
+function makePanel(id) {
+  const cv = document.getElementById(id);
+  const gl = cv.getContext('webgl2');
+  const sh = (type, src) => {
+    const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.log(id, gl.getShaderInfoLog(s));
+    return s;
+  };
+  const prog = gl.createProgram();
+  gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT));
+  gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG));
+  gl.linkProgram(prog); gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(0);
+  gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+  const tex = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, tex);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+  gl.uniform1i(gl.getUniformLocation(prog, 'uTex'), 0);
+  gl.uniform2f(gl.getUniformLocation(prog, 'uGrid'), 160, 80);
+  return { gl, tex };
+}
+
+const status = document.getElementById('status');
+const panels = FONTS.map(f => ({ ...makePanel('gl-' + f.id), capId: 'cap-' + f.id, elId: 'el-' + f.id }));
+let paints = 0;
+function drawAll() {
+  for (const f of FONTS) {
+    const canvas = document.getElementById('cap-' + f.id);
+    const ctx = canvas.getContext('2d');
+    try {
+      ctx.reset && ctx.reset();
+      ctx.drawElementImage(document.getElementById('el-' + f.id), 0, 0);
+    } catch (e) { status.textContent = 'draw error: ' + e.message; return; }
+  }
+  paints++;
+  for (const p of panels) {
+    p.gl.bindTexture(p.gl.TEXTURE_2D, p.tex);
+    p.gl.pixelStorei(p.gl.UNPACK_FLIP_Y_WEBGL, true);
+    p.gl.texImage2D(p.gl.TEXTURE_2D, 0, p.gl.RGBA, p.gl.RGBA, p.gl.UNSIGNED_BYTE, document.getElementById(p.capId));
+    p.gl.drawArrays(p.gl.TRIANGLE_STRIP, 0, 4);
+  }
+  status.textContent = 'paints: ' + paints + ' · centre point sampling, no dilation';
+  window.__paints = paints;
+}
+async function kick() {
+  try { await document.fonts.ready; } catch (e) {}
+  for (const f of FONTS) {
+    const canvas = document.getElementById('cap-' + f.id);
+    if ('requestPaint' in canvas) {
+      canvas.addEventListener('paint', drawAll);
+      canvas.requestPaint();
+      setTimeout(() => canvas.requestPaint(), 600);
+      setTimeout(() => canvas.requestPaint(), 1400);
+    }
+  }
+}
+kick();
+</script>
+</body>
+</html>

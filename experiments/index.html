@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Pixel UI — CSS experiments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  body { background:#20241f; color:#e8e4d5; font-family: system-ui, sans-serif; margin: 24px; }
+  h1 { font-size: 20px; } h2 { font-size: 14px; margin: 0 0 8px; color:#b7e3a8; font-family: Silkscreen, monospace; }
+  .note { color:#a9a294; font-size: 13px; max-width: 900px; line-height: 1.5; }
+  .grid { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 20px; }
+  .cell { background:#2b302a; padding: 14px; }
+  .cell .frame { width: 480px; height: 360px; overflow: hidden; position: relative; background:#3a4038; }
+  .verdict { font-size: 12px; color:#c9c2ab; width: 480px; line-height: 1.5; margin-top: 8px; }
+  /* ---------- the sample cluster, authored at SOURCE size (1x) ---------- */
+  .cluster {
+    width: 160px; height: 120px; box-sizing: border-box;
+    background: #f4ecd8; border: 1px solid #20301f; border-radius: 4px;
+    padding: 8px; font-family: 'Pixelify Sans', monospace; color: #22301f;
+  }
+  .cluster .hd { font-size: 11px; font-weight: 700; margin-bottom: 4px; }
+  .cluster .tx { font-size: 8px; color: #5a6353; line-height: 1.45; margin-bottom: 6px; }
+  .cluster .row { display: flex; gap: 6px; align-items: center; }
+  .cluster .btn {
+    background: #3e8948; color: #fff; border: 1px solid #1d3a1d; border-radius: 3px;
+    font-family: inherit; font-size: 9px; padding: 3px 7px; cursor: pointer;
+  }
+  .cluster .badge {
+    background: #e9b44c; border: 1px solid #7a5a14; border-radius: 999px;
+    font-size: 7px; padding: 1px 5px;
+  }
+  .cluster .avatar { width: 18px; height: 18px; border-radius: 50%; background: #e07a3f; border: 1px solid #7a3c14; flex: none; }
+  .cluster .inp {
+    width: 88px; font-family: inherit; font-size: 8px; padding: 2px 4px;
+    border: 1px solid #20301f; border-radius: 2px; background: #fffdf4; color: #22301f;
+  }
+  /* ---------- same cluster authored natively at 3x (control) ---------- */
+  .cluster3 {
+    width: 480px; height: 360px; box-sizing: border-box;
+    background: #f4ecd8; border: 3px solid #20301f; border-radius: 12px;
+    padding: 24px; font-family: 'Pixelify Sans', monospace; color: #22301f;
+  }
+  .cluster3 .hd { font-size: 33px; font-weight: 700; margin-bottom: 12px; }
+  .cluster3 .tx { font-size: 24px; color: #5a6353; line-height: 1.45; margin-bottom: 18px; }
+  .cluster3 .row { display: flex; gap: 18px; align-items: center; }
+  .cluster3 .btn {
+    background: #3e8948; color: #fff; border: 3px solid #1d3a1d; border-radius: 9px;
+    font-family: inherit; font-size: 27px; padding: 9px 21px; cursor: pointer;
+  }
+  .cluster3 .badge {
+    background: #e9b44c; border: 3px solid #7a5a14; border-radius: 999px;
+    font-size: 21px; padding: 3px 15px;
+  }
+  .cluster3 .avatar { width: 54px; height: 54px; border-radius: 50%; background: #e07a3f; border: 3px solid #7a3c14; flex: none; }
+  .cluster3 .inp {
+    width: 264px; font-family: inherit; font-size: 24px; padding: 6px 12px;
+    border: 3px solid #20301f; border-radius: 6px; background: #fffdf4; color: #22301f;
+  }
+  /* ---------- T5: native 3x but STEPPED (pixel) corners ---------- */
+  /* corner staircase over 12px with 3px steps: cut sequence (9,0)(9,3)(6,3)(6,6)(3,6)(3,9)(0,9) per corner */
+  .stepped {
+    clip-path: polygon(
+      9px 0, calc(100% - 9px) 0,
+      calc(100% - 9px) 3px, calc(100% - 6px) 3px, calc(100% - 6px) 6px, calc(100% - 3px) 6px, calc(100% - 3px) 9px, 100% 9px,
+      100% calc(100% - 9px),
+      calc(100% - 3px) calc(100% - 9px), calc(100% - 3px) calc(100% - 6px), calc(100% - 6px) calc(100% - 6px), calc(100% - 6px) calc(100% - 3px), calc(100% - 9px) calc(100% - 3px), calc(100% - 9px) 100%,
+      9px 100%,
+      9px calc(100% - 3px), 6px calc(100% - 3px), 6px calc(100% - 6px), 3px calc(100% - 6px), 3px calc(100% - 9px), 0 calc(100% - 9px),
+      0 9px,
+      3px 9px, 3px 6px, 6px 6px, 6px 3px, 9px 3px
+    );
+  }
+  .ring { box-shadow: inset 0 0 0 3px #20301f; }
+  .ring-green { box-shadow: inset 0 0 0 3px #1d3a1d; }
+  /* transform wrappers */
+  .scale3 { transform: scale(3); transform-origin: top left; }
+  .scale3-pixelated { transform: scale(3); transform-origin: top left; image-rendering: pixelated; }
+</style>
+</head>
+<body>
+<h1>Pixel UI — CSS experiments (display target 3×, pixel unit = 3px)</h1>
+<p class="note">One sample cluster (card, heading, text, button, pill badge, circular avatar, input, diagonal + circle SVG),
+authored once at <b>source size</b> (160×120, 1px borders, 4px radius, 11px font) and once natively at 3×.
+Each treatment below is a different way of getting the small one to 3×, or of faking pixels at 3×.
+Verdicts get filled in from the screenshots, at pixel level.</p>
+
+<!-- SOURCE — screenshotted at 1x for the raster treatment -->
+<div class="cell" style="width:200px">
+  <h2>SOURCE — cluster at 1× (actual size)</h2>
+  <div id="source" class="cluster">
+    <div class="hd">Repo Garden</div>
+    <div class="tx">Three plots are ready to harvest. CI is green on the world tree.</div>
+    <div class="row" style="margin-bottom:6px">
+      <button class="btn">Harvest</button>
+      <span class="badge">+3 plots</span>
+      <span class="avatar"></span>
+    </div>
+    <div class="row">
+      <input class="inp" value="tend the garden" />
+      <svg width="26" height="16" viewBox="0 0 26 16"><line x1="1" y1="15" x2="25" y2="1" stroke="#22301f" stroke-width="1"/><circle cx="13" cy="8" r="6" fill="none" stroke="#b3541e" stroke-width="1"/></svg>
+    </div>
+  </div>
+</div>
+
+<div class="grid">
+
+  <div class="cell">
+    <h2>T0 — CONTROL: authored natively at 3×</h2>
+    <div class="frame">
+      <div class="cluster3">
+        <div class="hd">Repo Garden</div>
+        <div class="tx">Three plots are ready to harvest. CI is green on the world tree.</div>
+        <div class="row" style="margin-bottom:18px">
+          <button class="btn">Harvest</button>
+          <span class="badge">+3 plots</span>
+          <span class="avatar"></span>
+        </div>
+        <div class="row">
+          <input class="inp" value="tend the garden" />
+          <svg width="78" height="48" viewBox="0 0 26 16"><line x1="1" y1="15" x2="25" y2="1" stroke="#22301f" stroke-width="1"/><circle cx="13" cy="8" r="6" fill="none" stroke="#b3541e" stroke-width="1"/></svg>
+        </div>
+      </div>
+    </div>
+    <p class="verdict">Expected: perfectly smooth arcs, diagonals and text. This is what ordinary CSS does at any size.</p>
+  </div>
+
+  <div class="cell">
+    <h2>T1 — shrink + CSS transform: scale(3)</h2>
+    <div class="frame">
+      <div class="scale3">
+        <div class="cluster">
+          <div class="hd">Repo Garden</div>
+          <div class="tx">Three plots are ready to harvest. CI is green on the world tree.</div>
+          <div class="row" style="margin-bottom:6px">
+            <button class="btn">Harvest</button>
+            <span class="badge">+3 plots</span>
+            <span class="avatar"></span>
+          </div>
+          <div class="row">
+            <input class="inp" value="tend the garden" />
+            <svg width="26" height="16" viewBox="0 0 26 16"><line x1="1" y1="15" x2="25" y2="1" stroke="#22301f" stroke-width="1"/><circle cx="13" cy="8" r="6" fill="none" stroke="#b3541e" stroke-width="1"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="verdict">Question: does Chromium re-rasterize the layer at 3× (smooth — trick fails) or resample the 1× raster (pixelated — trick works)?</p>
+  </div>
+
+  <div class="cell">
+    <h2>T1b — T1 + image-rendering: pixelated on the DOM node</h2>
+    <div class="frame">
+      <div class="scale3-pixelated">
+        <div class="cluster">
+          <div class="hd">Repo Garden</div>
+          <div class="tx">Three plots are ready to harvest. CI is green on the world tree.</div>
+          <div class="row" style="margin-bottom:6px">
+            <button class="btn">Harvest</button>
+            <span class="badge">+3 plots</span>
+            <span class="avatar"></span>
+          </div>
+          <div class="row">
+            <input class="inp" value="tend the garden" />
+            <svg width="26" height="16" viewBox="0 0 26 16"><line x1="1" y1="15" x2="25" y2="1" stroke="#22301f" stroke-width="1"/><circle cx="13" cy="8" r="6" fill="none" stroke="#b3541e" stroke-width="1"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="verdict">image-rendering is specified for replaced content (img/canvas), not live DOM. Expected: no effect vs T1 — here to prove it.</p>
+  </div>
+
+  <div class="cell">
+    <h2>T2 — shrink + zoom: 3</h2>
+    <div class="frame">
+      <div style="zoom: 3">
+        <div class="cluster">
+          <div class="hd">Repo Garden</div>
+          <div class="tx">Three plots are ready to harvest. CI is green on the world tree.</div>
+          <div class="row" style="margin-bottom:6px">
+            <button class="btn">Harvest</button>
+            <span class="badge">+3 plots</span>
+            <span class="avatar"></span>
+          </div>
+          <div class="row">
+            <input class="inp" value="tend the garden" />
+            <svg width="26" height="16" viewBox="0 0 26 16"><line x1="1" y1="15" x2="25" y2="1" stroke="#22301f" stroke-width="1"/><circle cx="13" cy="8" r="6" fill="none" stroke="#b3541e" stroke-width="1"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="verdict">zoom re-runs layout at the new size — vector-crisp by construction. Expected: identical to T0, trick fails; included because it's the commonly suggested one.</p>
+  </div>
+
+  <div class="cell">
+    <h2>T3 — true raster upscale: 1× screenshot, shown 3×, pixelated</h2>
+    <div class="frame" style="background:#3a4038">
+      <img id="rasterImg" alt="raster upscale of source cluster" style="width:480px; height:360px; image-rendering: pixelated; display:block" />
+    </div>
+    <p class="verdict">Guaranteed pixelated — it is literally the 1× bitmap magnified. Costs: static (no interaction, no live text, no a11y on the image), must be re-rendered on every state/content change.</p>
+  </div>
+
+  <div class="cell">
+    <h2>T4 — SVG pixelate filter on the 3× native cluster</h2>
+    <svg width="0" height="0" style="position:absolute">
+      <filter id="pix3" x="0" y="0" width="100%" height="100%">
+        <feFlood x="0" y="0" width="1" height="1" />
+        <feComposite width="3" height="3" />
+        <feTile result="tile" />
+        <feComposite in="SourceGraphic" in2="tile" operator="in" />
+        <feMorphology operator="dilate" radius="1.5" />
+      </filter>
+    </svg>
+    <div class="frame">
+      <div class="cluster3" style="filter: url(#pix3)">
+        <div class="hd">Repo Garden</div>
+        <div class="tx">Three plots are ready to harvest. CI is green on the world tree.</div>
+        <div class="row" style="margin-bottom:18px">
+          <button class="btn">Harvest</button>
+          <span class="badge">+3 plots</span>
+          <span class="avatar"></span>
+        </div>
+        <div class="row">
+          <input class="inp" value="tend the garden" />
+          <svg width="78" height="48" viewBox="0 0 26 16"><line x1="1" y1="15" x2="25" y2="1" stroke="#22301f" stroke-width="1"/><circle cx="13" cy="8" r="6" fill="none" stroke="#b3541e" stroke-width="1"/></svg>
+        </div>
+      </div>
+    </div>
+    <p class="verdict">The flood/tile/dilate mosaic trick: samples the source in 3px blocks. Question: does it hold up on live DOM in Chromium, and what does it do to text and hit-testing?</p>
+  </div>
+
+  <div class="cell">
+    <h2>T5 — native 3×, stepped pixel corners (clip-path) + inset ring border</h2>
+    <div class="frame">
+      <div class="cluster3 stepped ring" style="border:none; border-radius:0; background:#f4ecd8">
+        <div class="hd">Repo Garden</div>
+        <div class="tx">Three plots are ready to harvest. CI is green on the world tree.</div>
+        <div class="row" style="margin-bottom:18px">
+          <button class="btn stepped ring-green" style="border:none; border-radius:0">Harvest</button>
+          <span class="badge stepped ring" style="border:none; border-radius:0">+3 plots</span>
+          <span class="avatar"></span>
+        </div>
+        <div class="row">
+          <input class="inp stepped ring" style="border:none; border-radius:0" value="tend the garden" />
+          <svg width="78" height="48" viewBox="0 0 26 16"><line x1="1" y1="15" x2="25" y2="1" stroke="#22301f" stroke-width="1"/><circle cx="13" cy="8" r="6" fill="none" stroke="#b3541e" stroke-width="1"/></svg>
+        </div>
+      </div>
+    </div>
+    <p class="verdict">Corners step in 3px increments instead of arcing; the border is faked with an inset box-shadow ring because clip-path clips real borders.
+    Note the avatar and SVG stay smooth — clip-path only fixes rectangular corners. Fully live + interactive if it works.</p>
+  </div>
+
+  <div class="cell">
+    <h2>T6 — shrink + transform scale + will-change / forced layer</h2>
+    <div class="frame">
+      <div class="scale3" style="will-change: transform">
+        <div class="cluster">
+          <div class="hd">Repo Garden</div>
+          <div class="tx">Three plots are ready to harvest. CI is green on the world tree.</div>
+          <div class="row" style="margin-bottom:6px">
+            <button class="btn">Harvest</button>
+            <span class="badge">+3 plots</span>
+            <span class="avatar"></span>
+          </div>
+          <div class="row">
+            <input class="inp" value="tend the garden" />
+            <svg width="26" height="16" viewBox="0 0 26 16"><line x1="1" y1="15" x2="25" y2="1" stroke="#22301f" stroke-width="1"/><circle cx="13" cy="8" r="6" fill="none" stroke="#b3541e" stroke-width="1"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="verdict">If any variant keeps the 1× raster, it's the one where the layer is promoted and never re-rasterized. Compared pixel-for-pixel against T1 in the crops.</p>
+  </div>
+
+</div>
+<script>
+  // T3 is filled by the screenshot harness: it captures #source at 1x and
+  // drops the PNG next to this file as raster-1x.png.
+  document.getElementById('rasterImg').src = 'raster-1x.png';
+</script>
+</body>
+</html>
