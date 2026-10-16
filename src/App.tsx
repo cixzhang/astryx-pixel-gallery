@@ -12,6 +12,8 @@ import { Button } from '@astryxdesign/core/Button'
 import { Card } from '@astryxdesign/core/Card'
 import { Heading } from '@astryxdesign/core/Heading'
 import { Icon } from '@astryxdesign/core/Icon'
+import { CodeBlock } from '@astryxdesign/core/CodeBlock'
+import { Link } from '@astryxdesign/core/Link'
 import { ProgressBar } from '@astryxdesign/core/ProgressBar'
 import { HStack, VStack } from '@astryxdesign/core/Stack'
 import { Switch } from '@astryxdesign/core/Switch'
@@ -289,6 +291,44 @@ export default function App({ pixel, onPixelChange, palette, onPaletteChange, mo
             Every Astryx semantic icon is a 12x12 pixel matrix in the theme — the grid-font
             treatment for glyphs. The radio dot and checkbox check above are pixel indicators
             from the same file.
+          </Text>
+        </VStack>
+      </Card>
+
+      {/* ── Use it ─────────────────────────────────────────────── */}
+      <Card>
+        <VStack gap={4}>
+          <Heading level={2}>Use the theme</Heading>
+          <Link href="https://github.com/cixzhang/astryx-pixel-gallery" isExternalLink>
+            cixzhang/astryx-pixel-gallery on GitHub
+          </Link>
+          <CodeBlock
+            title="Install — two files, one build"
+            language="bash"
+            code={`# grab the theme: the factory + its pixel icons/indicators
+curl -O https://raw.githubusercontent.com/cixzhang/astryx-pixel-gallery/main/src/studio/pixel-theme.tsx
+curl -O https://raw.githubusercontent.com/cixzhang/astryx-pixel-gallery/main/src/studio/pixel-icons.tsx
+
+# build it with the Astryx CLI
+npx astryx theme build src/studio/pixel-theme.tsx`}
+          />
+          <CodeBlock
+            title="Apply it"
+            language="tsx"
+            code={`import { Theme } from '@astryxdesign/core/theme'
+import { createPixelTheme } from './studio/pixel-theme'
+
+// P is the pixel unit in CSS px — match it to your sprite scale.
+// palette: 'garden' | 'gameboy' | 'nes' | 'c64' | 'pico8'
+const theme = createPixelTheme(3, 'gameboy')
+
+<Theme theme={theme} mode="dark">
+  <App />
+</Theme>`}
+          />
+          <Text type="supporting">
+            Silkscreen ships separately (the theme names it; loading fonts is the app's job) —
+            the two .ttf files are in the repo under src/assets/fonts.
           </Text>
         </VStack>
       </Card>
