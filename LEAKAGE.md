@@ -37,6 +37,17 @@ sidecar code in components.
   keeping: micro-components carry fixed heights keyed to spacing tokens —
   audit each component's computed height when the type scale moves.
 
+**Inner corner radius, then the missing corner block (found in gallery,
+fixed in theme).** The inset-shadow ring takes its shape from the
+element's `border-radius`: with the radius token intact, the ring's
+inner edge stayed a smooth arc inside the stepped clip. Zeroing the
+radius fixed that, but an L-shaped ring leaves the diagonal cell
+[P,2P]² at each corner surface-coloured — the arms don't meet. The box
+style now also paints four P×P gradient patches in the ring colour,
+inset P from each corner, which fill exactly those cells. Lesson: a
+stepped frame is outer polygon minus *stepped* inner polygon; each
+CSS primitive (clip, shadow, gradient) supplies one part of it.
+
 ## Leakage
 
 1. **Fonts are named, never loaded.** The theme sets

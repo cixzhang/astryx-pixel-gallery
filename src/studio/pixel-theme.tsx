@@ -168,7 +168,26 @@ export function createPixelTheme(pixel = 3, paletteName: PixelPaletteName = 'gar
   // rounded inner edge inside the stepped clip (the "inner radius"
   // bug). At radius 0 the ring is a square frame and the clip-path
   // notches it into a stepped ring of uniform P thickness.
-  const box = {clipPath: pixelCorner, borderWidth: '0px', borderRadius: '0px', boxShadow: ring};
+  // The stepped frame's corner block: the L-shaped ring (an inset shadow)
+  // leaves the diagonal cell [P,2P]x[P,2P] at each corner surface-coloured
+  // -- the ring arms don't meet. Four P x P gradient patches in the ring
+  // colour, inset P from each corner, fill exactly those cells.
+  const cornerBlock = 'linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))';
+  const cornerBlocks = {
+    backgroundImage: [cornerBlock, cornerBlock, cornerBlock, cornerBlock].join(', '),
+    backgroundSize: 'var(--pixel) var(--pixel)',
+    backgroundPosition:
+      'left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), ' +
+      'left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)',
+    backgroundRepeat: 'no-repeat',
+  };
+  const box = {
+    clipPath: pixelCorner,
+    borderWidth: '0px',
+    borderRadius: '0px',
+    boxShadow: ring,
+    ...cornerBlocks,
+  };
 
   const fontSizeSteps: Record<string, number> = {
     '4xs': 6, '3xs': 7, '2xs': 8, xs: 10, sm: 12, base: 14,

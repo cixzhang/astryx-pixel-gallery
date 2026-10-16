@@ -253,6 +253,10 @@ export const pixelTheme = {
         "borderWidth": "0px",
         "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat",
         "padding": "var(--spacing-6)"
       }
     },
@@ -261,7 +265,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "clickable-card": {
@@ -269,7 +277,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "button": {
@@ -277,7 +289,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "toggle-button": {
@@ -285,7 +301,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "badge": {
@@ -294,6 +314,10 @@ export const pixelTheme = {
         "borderWidth": "0px",
         "borderRadius": "0px",
         "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat",
         "padding": "3px 9px",
         "lineHeight": "1",
         "height": "30px"
@@ -314,7 +338,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "text-area": {
@@ -322,7 +350,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "number-input": {
@@ -330,7 +362,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "date-input": {
@@ -338,7 +374,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "time-input": {
@@ -346,7 +386,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "date-time-input": {
@@ -354,7 +398,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "selector": {
@@ -362,7 +410,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "selector-popup": {
@@ -370,7 +422,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "selector-option": {
@@ -429,7 +485,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "alert-dialog": {
@@ -437,7 +497,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "bottom-sheet": {
@@ -451,7 +515,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "hover-card": {
@@ -459,7 +527,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "tooltip": {
@@ -473,7 +545,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "banner": {
@@ -481,7 +557,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "dropdown-menu": {
@@ -489,7 +569,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "dropdown-menu-item": {
@@ -502,7 +586,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "code-block": {
@@ -510,7 +598,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "thumbnail": {
@@ -535,7 +627,11 @@ export const pixelTheme = {
         "clipPath": "polygon( calc(var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) 0, calc(100% - var(--pixel) * 2) var(--pixel), calc(100% - var(--pixel)) var(--pixel), calc(100% - var(--pixel)) calc(var(--pixel) * 2), 100% calc(var(--pixel) * 2), 100% calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel) * 2), calc(100% - var(--pixel)) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) calc(100% - var(--pixel)), calc(100% - var(--pixel) * 2) 100%, calc(var(--pixel) * 2) 100%, calc(var(--pixel) * 2) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel)), var(--pixel) calc(100% - var(--pixel) * 2), 0 calc(100% - var(--pixel) * 2), 0 calc(var(--pixel) * 2), var(--pixel) calc(var(--pixel) * 2), var(--pixel) var(--pixel), calc(var(--pixel) * 2) var(--pixel))",
         "borderWidth": "0px",
         "borderRadius": "0px",
-        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)"
+        "boxShadow": "inset 0 0 0 3px var(--color-border-emphasized)",
+        "backgroundImage": "linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized)), linear-gradient(var(--color-border-emphasized), var(--color-border-emphasized))",
+        "backgroundSize": "var(--pixel) var(--pixel)",
+        "backgroundPosition": "left var(--pixel) top var(--pixel), right var(--pixel) top var(--pixel), left var(--pixel) bottom var(--pixel), right var(--pixel) bottom var(--pixel)",
+        "backgroundRepeat": "no-repeat"
       }
     },
     "segmented-control-item": {
