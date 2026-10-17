@@ -16,6 +16,7 @@ import { CodeBlock } from '@astryxdesign/core/CodeBlock'
 import { Link } from '@astryxdesign/core/Link'
 import { ProgressBar } from '@astryxdesign/core/ProgressBar'
 import { HStack, VStack } from '@astryxdesign/core/Stack'
+import { Grid } from '@astryxdesign/core/Grid'
 import { Switch } from '@astryxdesign/core/Switch'
 import { Text } from '@astryxdesign/core/Text'
 import { TextInput } from '@astryxdesign/core/TextInput'
@@ -107,7 +108,7 @@ export default function App({ pixel, onPixelChange, palette, onPaletteChange, mo
           A pure defineTheme config. One number — the pixel unit P — drives the type scale,
           spacing, borders and corners, so the UI pixels can match the app&apos;s sprite scale.
         </Text>
-        <HStack gap={3} align="center">
+        <HStack gap={3} align="center" wrap="wrap">
           <Text type="label">Pixel unit</Text>
           {[2, 3, 4].map((p) => (
             <ToggleButton
@@ -123,15 +124,14 @@ export default function App({ pixel, onPixelChange, palette, onPaletteChange, mo
         </HStack>
         <HStack gap={3} align="center" wrap="wrap">
           <Text type="label">Palette</Text>
-          <SegmentedControl
-            label="Colour palette"
-            value={palette}
-            onChange={(v) => onPaletteChange(v as PixelPaletteName)}
-          >
-            {PALETTES.map((p) => (
-              <SegmentedControlItem key={p.value} value={p.value} label={p.label} />
-            ))}
-          </SegmentedControl>
+          {PALETTES.map((p) => (
+            <ToggleButton
+              key={p.value}
+              label={p.label}
+              isPressed={palette === p.value}
+              onPressedChange={() => onPaletteChange(p.value)}
+            />
+          ))}
           <ToggleButton
             label="Dark"
             isPressed={mode === 'dark'}
@@ -162,7 +162,7 @@ export default function App({ pixel, onPixelChange, palette, onPaletteChange, mo
         </VStack>
       </Card>
 
-      <HStack gap={6} wrap="wrap">
+      <Grid columns={{ minWidth: 320, repeat: 'fit' }} gap={6}>
         {/* ── Buttons ────────────────────────────────────────────── */}
         <Card>
           <VStack gap={4}>
@@ -198,9 +198,9 @@ export default function App({ pixel, onPixelChange, palette, onPaletteChange, mo
             <ProgressBar label="Sunlight" value={91} max={100} variant="success" hasValueLabel />
           </VStack>
         </Card>
-      </HStack>
+      </Grid>
 
-      <HStack gap={6} wrap="wrap">
+      <Grid columns={{ minWidth: 320, repeat: 'fit' }} gap={6}>
         {/* ── Form ───────────────────────────────────────────────── */}
         <Card>
           <VStack gap={4}>
@@ -220,7 +220,7 @@ export default function App({ pixel, onPixelChange, palette, onPaletteChange, mo
         <Card>
           <VStack gap={4}>
             <Heading level={2}>Avatars</Heading>
-            <HStack gap={4} align="center">
+            <HStack gap={4} align="center" wrap="wrap">
               <Avatar src={pixelAvatar} name="Cindy Zhang" size="lg" shape="circle" />
               <Avatar src={pixelAvatar} name="Cindy Zhang" size="lg" shape="rounded" />
               <Avatar src={pixelAvatar} name="Cindy Zhang" size="lg" shape="square" />
@@ -231,9 +231,9 @@ export default function App({ pixel, onPixelChange, palette, onPaletteChange, mo
             </Text>
           </VStack>
         </Card>
-      </HStack>
+      </Grid>
 
-      <HStack gap={6} wrap="wrap">
+      <Grid columns={{ minWidth: 320, repeat: 'fit' }} gap={6}>
         {/* ── Controls — the rest of the set, pixelated ── */}
         <Card>
           <VStack gap={4}>
@@ -246,24 +246,24 @@ export default function App({ pixel, onPixelChange, palette, onPaletteChange, mo
               <RadioListItem label="Summer" value="summer" />
               <RadioListItem label="Autumn" value="autumn" />
             </RadioList>
-            <SegmentedControl label="Garden tool" value={tool} onChange={setTool}>
+            <SegmentedControl label="Garden tool" value={tool} onChange={setTool} size="sm" layout="fill">
               <SegmentedControlItem value="water" label="Water" />
               <SegmentedControlItem value="feed" label="Feed" />
               <SegmentedControlItem value="prune" label="Prune" />
             </SegmentedControl>
           </VStack>
         </Card>
-      </HStack>
+      </Grid>
 
       {/* ── Repo Garden composite — the gardening app in miniature ── */}
       <Card>
         <VStack gap={5}>
-          <HStack gap={4} justify="between" align="center">
+          <HStack gap={4} justify="between" align="center" wrap="wrap">
             <Heading level={2}>Repo Garden — plots</Heading>
             <Badge label={`Harvested ${harvested}`} variant="green" />
           </HStack>
           {PLOTS.map((plot) => (
-            <HStack key={plot.name} gap={4} justify="between" align="center">
+            <HStack key={plot.name} gap={4} justify="between" align="center" wrap="wrap">
               <VStack gap={1}>
                 <Text type="body">{plot.name}</Text>
                 <ProgressBar label={`${plot.name} health`} value={plot.health} max={100} isLabelHidden />
