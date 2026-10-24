@@ -1,29 +1,25 @@
 # Capture Astryx Swift components in the iOS Simulator for review (scratch).
 name: astryx-native-captures
+# What to capture lives in capture.env: REF (a facebook/astryx commit) and
+# SCREENS (space-separated files in Captures/Screens, without .swift).
 on:
-  workflow_dispatch:
-    inputs:
-      ref:
-        description: facebook/astryx commit to build
-        required: true
-      screens:
-        description: Space-separated capture screens (files in Captures/Screens without .swift)
-        required: true
+  push:
+    branches: [astryx-native-captures]
 jobs:
   capture:
     runs-on: macos-15
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
+      - name: Read capture.env
+        run: cat capture.env >> "$GITHUB_ENV"
       - uses: actions/checkout@v4
         with:
           repository: facebook/astryx
-          ref: ${{ inputs.ref }}
+          ref: ${{ env.REF }}
           path: astryx
           sparse-checkout: packages/native/apple
       - name: Keep only the requested screens and register them
-        env:
-          SCREENS: ${{ inputs.screens }}
         run: |
           cd Captures
           for f in Screens/*.swift; do
@@ -54,9 +50,6 @@ jobs:
             exit 1
           fi
       - name: Screenshots
-        env:
-          SCREENS: ${{ inputs.screens }}
-          REF: ${{ inputs.ref }}
         run: |
           set -euo pipefail
           UDID=$(cat udid.txt)
