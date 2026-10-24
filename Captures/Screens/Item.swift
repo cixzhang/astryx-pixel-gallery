@@ -9,21 +9,21 @@ struct ItemScreen: View {
     VStack(alignment: .leading, spacing: 8) {
       CaptureRow(title: "People: Avatar start, chevron end, button rows") {
         VStack(spacing: 0) {
-          Item("Ada Lovelace", description: "Mathematician", onClick: {}) {
+          Item("Ada Lovelace", description: "Mathematician") {
             Avatar("Ada Lovelace", src: photo)
           } endContent: {
             Icon(.chevronRight, color: .secondary)
-          }
-          Item("Grace Hopper", description: "Rear admiral", isSelected: true, onClick: {}) {
+          } onClick: {}
+          Item("Grace Hopper", description: "Rear admiral", isSelected: true) {
             Avatar("Grace Hopper")
           } endContent: {
             Icon(.chevronRight, color: .secondary)
-          }
-          Item("Alan Turing", description: "Away", isDisabled: true, onClick: {}) {
+          } onClick: {}
+          Item("Alan Turing", description: "Away", isDisabled: true) {
             Avatar("Alan Turing")
           } endContent: {
             Icon(.chevronRight, color: .secondary)
-          }
+          } onClick: {}
         }
       }
       CaptureRow(title: "Settings: Icon start, value end, highlighted") {
