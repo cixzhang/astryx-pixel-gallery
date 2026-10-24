@@ -1,0 +1,138 @@
+// Copyright (c) Meta Platforms, Inc. and affiliates.
+// Adapted from github.com/ejc3/astryx-swift (MIT).
+
+import SwiftUI
+
+/// Core's `Button` variants.
+public enum AstryxButtonVariant: String, CaseIterable, Sendable {
+  case primary
+  case secondary
+  case ghost
+  case destructive
+}
+
+/// Core's `Button` sizes: `size-element-sm`, `-md`, and `-lg` high.
+public enum AstryxButtonSize: String, CaseIterable, Sendable {
+  case sm
+  case md
+  case lg
+
+  var heightToken: String { "size-element-\(rawValue)" }
+  var fallbackHeight: CGFloat {
+    switch self {
+    case .sm: 28
+    case .md: 32
+    case .lg: 36
+    }
+  }
+}
+
+/// A labeled action, painted with the theme's tokens. The tap area reaches
+/// the platform's 44-by-44-point minimum even when the drawn button is smaller.
+public struct AstryxButton: View {
+  let label: String
+  let variant: AstryxButtonVariant
+  let size: AstryxButtonSize
+  let icon: String?
+  let isLoading: Bool
+  let isDisabled: Bool
+  let fillsWidth: Bool
+  let action: () -> Void
+  @Environment(\.astryx) private var astryx
+
+  /// - Parameters:
+  ///   - icon: an SF Symbol name shown before the label.
+  ///   - fillsWidth: the button takes the whole width it is offered, as
+  ///     core's `width="100%"` does.
+  public init(
+    label: String,
+    variant: AstryxButtonVariant = .secondary,
+    size: AstryxButtonSize = .md,
+    icon: String? = nil,
+    isLoading: Bool = false,
+    isDisabled: Bool = false,
+    fillsWidth: Bool = false,
+    action: @escaping () -> Void
+  ) {
+    self.label = label
+    self.variant = variant
+    self.size = size
+    self.icon = icon
+    self.isLoading = isLoading
+    self.isDisabled = isDisabled
+    self.fillsWidth = fillsWidth
+    self.action = action
+  }
+
+  public var body: some View {
+    Button(action: action) {
+      HStack(spacing: astryx.space(2)) {
+        if isLoading {
+          ProgressView().controlSize(.small).tint(foreground)
+        } else if let icon {
+          Image(systemName: icon)
+        }
+        Text(label).lineLimit(1)
+      }
+    }
+    .buttonStyle(
+      AstryxButtonStyle(
+        astryx: astryx,
+        size: size,
+        fillsWidth: fillsWidth,
+        foreground: foreground,
+        background: background
+      )
+    )
+    // A loading button keeps its label for VoiceOver, and the progress
+    // indicator announces itself; taps are ignored until it finishes.
+    .disabled(isDisabled || isLoading)
+  }
+
+  private var foreground: Color {
+    switch variant {
+    case .primary: astryx.color("color-on-accent")
+    case .destructive: astryx.color("color-on-error")
+    case .secondary, .ghost: astryx.color("color-text-primary")
+    }
+  }
+
+  private var background: Color {
+    switch variant {
+    case .primary: astryx.color("color-accent")
+    case .destructive: astryx.color("color-error")
+    case .secondary: astryx.color("color-neutral")
+    case .ghost: .clear
+    }
+  }
+}
+
+struct AstryxButtonStyle: ButtonStyle {
+  let astryx: AstryxStyle
+  let size: AstryxButtonSize
+  let fillsWidth: Bool
+  let foreground: Color
+  let background: Color
+  @Environment(\.isEnabled) private var isEnabled
+
+  func makeBody(configuration: Configuration) -> some View {
+    // SPIKE (H5): the theme's surface shape instead of a fixed rounded rect.
+    let shape = astryx.surfaceShape("button", radius: "radius-element", 8)
+    // Grows with text size, but not so far that one line of a large label
+    // becomes a tall slab.
+    let height = astryx.size(size.heightToken, size.fallbackHeight) * min(astryx.textScale, 1.4)
+    configuration.label
+      .font(astryx.font(size: "text-label-size", 14, weight: "text-label-weight"))
+      .foregroundStyle(foreground)
+      .padding(.horizontal, astryx.space(3))
+      .frame(maxWidth: fillsWidth ? .infinity : nil, minHeight: height)
+      .background(shape.fill(background))
+      // SPIKE (H4, H5): a border only when the theme gives buttons one.
+      .overlay(astryx.surfaceBorder("button", radius: "radius-element", 8, color: nil))
+      .opacity(isEnabled ? (configuration.isPressed ? 0.75 : 1) : 0.5)
+      // Drawn at the token size; laid out at least 44 by 44 so the whole
+      // platform-minimum tap area counts.
+      .frame(minWidth: 44, minHeight: 44)
+      .contentShape(Rectangle())
+  }
+}

@@ -1,0 +1,38 @@
+# SPIKE: build the native comparison app and screenshot it in the iOS
+# simulator. Runs only on the spike branch.
+name: native-spike
+on:
+  push:
+    branches: [spike/native-swift]
+    paths: ['native/**', 'src/studio/**', '.github/workflows/native-spike.yml']
+  workflow_dispatch:
+jobs:
+  ios-screenshots:
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: |
+          brew install xcodegen
+          xcodebuild -version
+          xcrun simctl list runtimes
+      - name: Typecheck the Swift package (macOS)
+        working-directory: native/swift
+        run: swift build
+      - name: Generate the Xcode project
+        working-directory: native/App
+        run: xcodegen generate
+      - name: Build for the simulator
+        working-directory: native/App
+        run: |
+          set -o pipefail
+          xcodebuild -project PixelSpike.xcodeproj -scheme PixelSpike -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO build | tail -40
+      - name: Screenshots
+        run: native/tools/ci-screenshots.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: native-screenshots
+          path: native/out

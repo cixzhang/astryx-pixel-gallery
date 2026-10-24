@@ -1,0 +1,38 @@
+# SPIKE: XcodeGen project for the comparison app. `xcodegen generate` here.
+name: PixelSpike
+options:
+  bundleIdPrefix: io.github.cixzhang
+  deploymentTarget:
+    iOS: "17.0"
+packages:
+  AstryxSwiftIOS:
+    path: ../swift
+targets:
+  PixelSpike:
+    type: application
+    scheme: {}
+    platform: iOS
+    sources:
+      - Sources
+      - path: Resources
+        buildPhase: resources
+    dependencies:
+      - package: AstryxSwiftIOS
+        product: AstryxCore
+      - package: AstryxSwiftIOS
+        product: AstryxTemplates
+    info:
+      path: Sources/Info.plist
+      properties:
+        CFBundleDisplayName: PixelSpike
+        UILaunchScreen: {}
+        UIAppFonts:
+          - silkscreen-400.ttf
+          - silkscreen-700.ttf
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.cixzhang.PixelSpike
+        CODE_SIGNING_ALLOWED: "NO"
+        CODE_SIGNING_REQUIRED: "NO"
+        SWIFT_VERSION: "6.0"
+        TARGETED_DEVICE_FAMILY: "1"

@@ -1,0 +1,217 @@
+{
+  "webPartReports": [
+    "defineNativeTheme(pixel): \"components\" is web-only and has no native meaning; use native platform entries instead",
+    "defineNativeTheme(pixel): \"icons\" is web-only and has no native meaning; use native platform entries instead",
+    "defineNativeTheme(pixel): \"indicators\" is web-only and has no native meaning; use native platform entries instead",
+    "defineNativeTheme(pixel): \"onDark\" is web-only and has no native meaning; use native platform entries instead",
+    "defineNativeTheme(pixel): \"onLight\" is web-only and has no native meaning; use native platform entries instead",
+    "defineNativeTheme(pixel): \"adaptations\" is web-only and has no native meaning; use native platform entries instead"
+  ],
+  "notEmitted": {
+    "--focus-outline-width": {
+      "light": "3px",
+      "dark": "3px"
+    },
+    "--focus-outline-offset": {
+      "light": "3px",
+      "dark": "3px"
+    },
+    "--shadow-low": {
+      "light": "3px 3px 0 0 light-dark(rgba(34,48,31,0.25), rgba(0,0,0,0.5))",
+      "dark": "3px 3px 0 0 light-dark(rgba(34,48,31,0.25), rgba(0,0,0,0.5))"
+    },
+    "--shadow-med": {
+      "light": "6px 6px 0 0 light-dark(rgba(34,48,31,0.25), rgba(0,0,0,0.5))",
+      "dark": "6px 6px 0 0 light-dark(rgba(34,48,31,0.25), rgba(0,0,0,0.5))"
+    },
+    "--shadow-high": {
+      "light": "9px 9px 0 0 light-dark(rgba(34,48,31,0.3), rgba(0,0,0,0.55))",
+      "dark": "9px 9px 0 0 light-dark(rgba(34,48,31,0.3), rgba(0,0,0,0.55))"
+    },
+    "--duration-fast": {
+      "light": "120ms",
+      "dark": "120ms"
+    },
+    "--duration-medium": {
+      "light": "240ms",
+      "dark": "240ms"
+    },
+    "--duration-slow": {
+      "light": "360ms",
+      "dark": "360ms"
+    },
+    "--ease-standard": {
+      "light": "steps(3, end)",
+      "dark": "steps(3, end)"
+    }
+  },
+  "localTokens": {
+    "--pixel": "3px"
+  },
+  "weightKeywords": {
+    "--text-heading-1-weight": "bold",
+    "--text-heading-2-weight": "bold",
+    "--text-heading-3-weight": "bold",
+    "--text-heading-4-weight": "bold",
+    "--text-heading-5-weight": "bold",
+    "--text-heading-6-weight": "bold",
+    "--text-label-weight": "bold"
+  },
+  "nativeToday": {
+    "material": "opaque",
+    "components": {
+      "button": {
+        "borderColor": "color-border-emphasized",
+        "borderWidth": "border-width"
+      },
+      "text-input": {
+        "borderColor": "color-border-emphasized",
+        "borderWidth": "border-width"
+      },
+      "card": {
+        "cornerRadius": "radius-element",
+        "borderColor": "color-border-emphasized",
+        "borderWidth": "border-width",
+        "padding": "spacing-6"
+      },
+      "banner": {
+        "cornerRadius": "radius-element",
+        "borderColor": "color-border-emphasized",
+        "borderWidth": "border-width"
+      }
+    },
+    "icons": {
+      "info": {
+        "systemName": "info.square.fill"
+      },
+      "error": {
+        "systemName": "xmark.square.fill"
+      },
+      "success": {
+        "systemName": "checkmark.square.fill"
+      },
+      "warning": {
+        "systemName": "exclamationmark.triangle.fill"
+      },
+      "close": {
+        "systemName": "xmark"
+      },
+      "check": {
+        "systemName": "checkmark"
+      }
+    }
+  },
+  "nativeProposed": {
+    "corners": "stepped",
+    "imageScaling": "pixelated",
+    "textGrid": 8,
+    "material": "opaque",
+    "components": {
+      "button": {
+        "borderColor": "color-border-emphasized",
+        "borderWidth": "border-width"
+      },
+      "text-input": {
+        "borderColor": "color-border-emphasized",
+        "borderWidth": "border-width"
+      },
+      "card": {
+        "cornerRadius": "radius-element",
+        "borderColor": "color-border-emphasized",
+        "borderWidth": "border-width",
+        "padding": "spacing-6"
+      },
+      "banner": {
+        "cornerRadius": "radius-element",
+        "borderColor": "color-border-emphasized",
+        "borderWidth": "border-width"
+      }
+    },
+    "icons": {
+      "close": {
+        "assetName": "pixel.close"
+      },
+      "chevronDown": {
+        "assetName": "pixel.chevronDown"
+      },
+      "chevronLeft": {
+        "assetName": "pixel.chevronLeft"
+      },
+      "chevronRight": {
+        "assetName": "pixel.chevronRight"
+      },
+      "chevronsLeft": {
+        "assetName": "pixel.chevronsLeft"
+      },
+      "chevronsRight": {
+        "assetName": "pixel.chevronsRight"
+      },
+      "check": {
+        "assetName": "pixel.check"
+      },
+      "success": {
+        "assetName": "pixel.success"
+      },
+      "error": {
+        "assetName": "pixel.error"
+      },
+      "warning": {
+        "assetName": "pixel.warning"
+      },
+      "info": {
+        "assetName": "pixel.info"
+      },
+      "calendar": {
+        "assetName": "pixel.calendar"
+      },
+      "clock": {
+        "assetName": "pixel.clock"
+      },
+      "externalLink": {
+        "assetName": "pixel.externalLink"
+      },
+      "menu": {
+        "assetName": "pixel.menu"
+      },
+      "moreHorizontal": {
+        "assetName": "pixel.moreHorizontal"
+      },
+      "search": {
+        "assetName": "pixel.search"
+      },
+      "arrowUp": {
+        "assetName": "pixel.arrowUp"
+      },
+      "arrowDown": {
+        "assetName": "pixel.arrowDown"
+      },
+      "arrowsUpDown": {
+        "assetName": "pixel.arrowsUpDown"
+      },
+      "funnel": {
+        "assetName": "pixel.funnel"
+      },
+      "eyeSlash": {
+        "assetName": "pixel.eyeSlash"
+      },
+      "viewColumns": {
+        "assetName": "pixel.viewColumns"
+      },
+      "copy": {
+        "assetName": "pixel.copy"
+      },
+      "checkDouble": {
+        "assetName": "pixel.checkDouble"
+      },
+      "wrench": {
+        "assetName": "pixel.wrench"
+      },
+      "stop": {
+        "assetName": "pixel.stop"
+      },
+      "microphone": {
+        "assetName": "pixel.microphone"
+      }
+    }
+  }
+}
