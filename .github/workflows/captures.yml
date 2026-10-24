@@ -1,0 +1,85 @@
+# Capture Astryx Swift components in the iOS Simulator for review (scratch).
+name: astryx-native-captures
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: facebook/astryx commit to build
+        required: true
+      screens:
+        description: Space-separated capture screens (files in Captures/Screens without .swift)
+        required: true
+jobs:
+  capture:
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: facebook/astryx
+          ref: ${{ inputs.ref }}
+          path: astryx
+          sparse-checkout: packages/native/apple
+      - name: Keep only the requested screens and register them
+        env:
+          SCREENS: ${{ inputs.screens }}
+        run: |
+          cd Captures
+          for f in Screens/*.swift; do
+            n=$(basename "$f" .swift)
+            case " $SCREENS " in *" $n "*) ;; *) rm "$f" ;; esac
+          done
+          {
+            echo 'import SwiftUI'
+            echo '@ViewBuilder @MainActor func captureScreen(named name: String) -> some View {'
+            echo '  switch name {'
+            for n in $SCREENS; do echo "  case \"$n\": ${n}Screen()"; done
+            echo '  default: SwiftUI.Text("No screen \(name)")'
+            echo '  }'
+            echo '}'
+          } > Sources/Registry.swift
+          cat Sources/Registry.swift
+      - name: Build
+        run: |
+          brew install xcodegen
+          cd Captures
+          xcodegen generate
+          UDID=$(xcrun simctl create captures "iPhone 16" com.apple.CoreSimulator.SimRuntime.iOS-18-5)
+          echo "$UDID" > ../udid.txt
+          xcrun simctl boot "$UDID"
+          if ! xcodebuild -project Captures.xcodeproj -scheme Captures -sdk iphonesimulator \
+            -destination "id=$UDID" -derivedDataPath build CODE_SIGNING_ALLOWED=NO build > build.log 2>&1; then
+            grep -n -B2 -A8 -E "error:" build.log | head -150
+            exit 1
+          fi
+      - name: Screenshots
+        env:
+          SCREENS: ${{ inputs.screens }}
+          REF: ${{ inputs.ref }}
+        run: |
+          set -euo pipefail
+          UDID=$(cat udid.txt)
+          APP=$(find Captures/build -type d -name Captures.app -path '*iphonesimulator*' | head -1)
+          OUT=out; mkdir -p $OUT
+          xcrun simctl bootstatus "$UDID" -b
+          xcrun simctl status_bar "$UDID" override --time 9:41 --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4
+          xcrun simctl install "$UDID" "$APP"
+          for screen in $SCREENS; do
+            for mode in light dark; do
+              xcrun simctl ui "$UDID" appearance "$mode"
+              for size in large ax5; do
+                args=(-screen "$screen")
+                if [ "$size" = ax5 ]; then args+=(-UIPreferredContentSizeCategoryName UICTContentSizeCategoryAccessibilityXXXL); fi
+                xcrun simctl launch --terminate-running-process "$UDID" io.github.cixzhang.AstryxCaptures "${args[@]}" >/dev/null
+                sleep 4
+                xcrun simctl io "$UDID" screenshot "$OUT/$screen-$mode-$size.png"
+              done
+            done
+          done
+          { echo "astryx ref: $REF"; xcodebuild -version; xcrun simctl getenv "$UDID" SIMULATOR_RUNTIME_VERSION || true; } > $OUT/manifest.txt
+          ls -la $OUT
+      - uses: actions/upload-artifact@v4
+        with:
+          name: captures
+          path: out
