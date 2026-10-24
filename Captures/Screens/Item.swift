@@ -50,7 +50,7 @@ struct ItemScreen: View {
               description: "A description long enough to take two lines in this row",
               align: align, descriptionLines: 2
             ) {
-              Avatar("Ada Lovelace", size: .sm)
+              Avatar("Ada Lovelace", size: .lg)
             }
           }
         }
