@@ -26,10 +26,15 @@ jobs:
       - name: Build for the simulator
         working-directory: native/App
         run: |
-          set -o pipefail
-          xcodebuild -project PixelSpike.xcodeproj -scheme PixelSpike -sdk iphonesimulator \
-            -destination 'generic/platform=iOS Simulator' -derivedDataPath build \
-            CODE_SIGNING_ALLOWED=NO build | tail -40
+          xcrun simctl create pixel-spike "iPhone 16" com.apple.CoreSimulator.SimRuntime.iOS-18-5 > ../../udid.txt
+          xcrun simctl boot "$(cat ../../udid.txt)"
+          if ! xcodebuild -project PixelSpike.xcodeproj -scheme PixelSpike -sdk iphonesimulator \
+            -destination "id=$(cat ../../udid.txt)" -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO build > build.log 2>&1; then
+            grep -n -B2 -A6 -E "error:|failed|Failed" build.log | head -120
+            exit 1
+          fi
+          tail -5 build.log
       - name: Screenshots
         run: native/tools/ci-screenshots.sh
       - uses: actions/upload-artifact@v4

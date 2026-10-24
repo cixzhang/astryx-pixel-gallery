@@ -5,8 +5,7 @@ OUT=native/out
 mkdir -p "$OUT"
 APP=$(find native/App/build -type d -name PixelSpike.app -path '*iphonesimulator*' | head -1)
 BUNDLE=io.github.cixzhang.PixelSpike
-UDID=$(xcrun simctl create pixel-spike "iPhone 16")
-xcrun simctl boot "$UDID"
+UDID=$(cat udid.txt)
 xcrun simctl bootstatus "$UDID" -b
 xcrun simctl status_bar "$UDID" override --time 9:41 --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4
 xcrun simctl install "$UDID" "$APP"
