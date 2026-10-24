@@ -1,4 +1,5 @@
 import Astryx
+import AstryxNative
 import SwiftUI
 
 struct IconScreen: View {

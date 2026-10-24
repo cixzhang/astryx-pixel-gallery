@@ -16,6 +16,8 @@ targets:
     dependencies:
       - package: Astryx
         product: Astryx
+      - package: Astryx
+        product: AstryxNative
     info:
       path: Sources/Info.plist
       properties:

@@ -1,4 +1,5 @@
 import Astryx
+import AstryxNative
 import SwiftUI
 
 private let photo = "https://avatars.githubusercontent.com/u/69631?s=256&v=4"
