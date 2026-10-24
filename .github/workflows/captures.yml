@@ -1,18 +1,36 @@
 # Capture Astryx Swift components in the iOS Simulator for review (scratch).
 name: astryx-native-captures
-# What to capture lives in capture.env: REF (a facebook/astryx commit) and
-# SCREENS (space-separated files in Captures/Screens, without .swift).
+# What to capture lives in capture.env: CAPTURES, space-separated
+# <screen>:<facebook/astryx commit> pairs; each screen is a file in
+# Captures/Screens without .swift.
 on:
   push:
     branches: [astryx-native-captures]
 jobs:
-  capture:
-    runs-on: macos-15
-    timeout-minutes: 45
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
-      - name: Read capture.env
-        run: cat capture.env >> "$GITHUB_ENV"
+      - id: plan
+        run: |
+          # capture.env: CAPTURES="Icon:<sha> Avatar:<sha>"
+          . ./capture.env
+          echo "matrix=$(python3 -c 'import json,sys; print(json.dumps([dict(zip(("screen","ref"),c.split(":"))) for c in sys.argv[1:]]))' $CAPTURES)" >> "$GITHUB_OUTPUT"
+  capture:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: macos-15
+    timeout-minutes: 45
+    env:
+      REF: ${{ matrix.ref }}
+      SCREENS: ${{ matrix.screen }}
+    steps:
+      - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
           repository: facebook/astryx
@@ -74,5 +92,5 @@ jobs:
           ls -la $OUT
       - uses: actions/upload-artifact@v4
         with:
-          name: captures
+          name: captures-${{ matrix.screen }}
           path: out

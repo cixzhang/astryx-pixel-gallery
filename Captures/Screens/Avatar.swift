@@ -8,14 +8,14 @@ struct AvatarScreen: View {
   var body: some View {
     VStack(alignment: .leading, spacing: 8) {
       CaptureRow(title: "Sizes: xsm sm md lg xl (initials)") {
-        HStack(alignment: .center, spacing: 12) {
+        Flow(spacing: 12) {
           ForEach([AvatarSize.xsm, .sm, .md, .lg, .xl], id: \.self) { size in
             Avatar("Ada Lovelace", size: size)
           }
         }
       }
       CaptureRow(title: "Shapes: circle rounded square (photo, then initials)") {
-        HStack(spacing: 12) {
+        Flow(spacing: 12) {
           ForEach(AvatarShape.allCases, id: \.self) { shape in
             Avatar("Ada Lovelace", src: photo, size: .lg, shape: shape)
           }
@@ -25,7 +25,7 @@ struct AvatarScreen: View {
         }
       }
       CaptureRow(title: "Fallbacks: photo, broken src → fallbackSrc, broken → initials, no name → symbol") {
-        HStack(spacing: 12) {
+        Flow(spacing: 12) {
           Avatar("Ada Lovelace", src: photo, size: .lg)
           Avatar("Ada Lovelace", src: broken, fallbackSrc: photo, size: .lg)
           Avatar("Ada Lovelace", src: broken, size: .lg)
@@ -33,7 +33,7 @@ struct AvatarScreen: View {
         }
       }
       CaptureRow(title: "Initials: emoji, flag, punctuation, digits") {
-        HStack(spacing: 12) {
+        Flow(spacing: 12) {
           Avatar("😀 Ada", size: .lg)
           Avatar("🇬🇧 Ada", size: .lg)
           Avatar("Northwind Workbench (automation)", size: .lg)
@@ -42,7 +42,7 @@ struct AvatarScreen: View {
         }
       }
       CaptureRow(title: "Static, link, button: drawn the same") {
-        HStack(spacing: 12) {
+        Flow(spacing: 12) {
           Avatar("Ada Lovelace", size: .md)
           Avatar("Ada Lovelace", size: .md, href: "https://example.com/ada")
           Avatar("Ada Lovelace", size: .md) {}
@@ -58,7 +58,7 @@ struct AvatarScreen: View {
         }
       }
       CaptureRow(title: "Themes: default, neutral, butter") {
-        HStack(spacing: 12) {
+        Flow(spacing: 12) {
           Avatar("Ada Lovelace", size: .lg)
           Avatar("Ada Lovelace", size: .lg).astryxTheme(.neutral)
           Avatar("Ada Lovelace", size: .lg).astryxTheme(.butter)

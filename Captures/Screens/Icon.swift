@@ -5,27 +5,27 @@ struct IconScreen: View {
   var body: some View {
     VStack(alignment: .leading, spacing: 8) {
       CaptureRow(title: "Sizes: xsm sm md lg") {
-        HStack(alignment: .center, spacing: 16) {
+        Flow(spacing: 16) {
           ForEach([IconSize.xsm, .sm, .md, .lg], id: \.self) { size in
             Icon(.search, color: .primary, size: size)
           }
         }
       }
       CaptureRow(title: "Colors: primary secondary tertiary disabled accent success error warning") {
-        HStack(spacing: 12) {
+        Flow(spacing: 12) {
           ForEach(IconColor.allCases.filter { $0 != .inherit }, id: \.self) { color in
             Icon(.info, color: color, size: .lg)
           }
         }
       }
       CaptureRow(title: "inherit: takes the surrounding foreground") {
-        HStack(spacing: 12) {
+        Flow(spacing: 12) {
           Icon(.check, size: .lg).foregroundStyle(.pink)
           Icon(.check, size: .lg).foregroundStyle(.blue)
         }
       }
       CaptureRow(title: "Every built-in name (md, primary)") {
-        LazyVGrid(columns: Array(repeating: GridItem(.fixed(28), spacing: 8), count: 10), alignment: .leading, spacing: 10) {
+        Flow(spacing: 12) {
           ForEach(IconName.builtIn, id: \.self) { name in
             Icon(name, color: .primary)
           }
@@ -39,7 +39,7 @@ struct IconScreen: View {
         }
       }
       CaptureRow(title: "Themes: default, neutral, butter (accent)") {
-        HStack(spacing: 16) {
+        Flow(spacing: 16) {
           Icon(.stop, color: .accent, size: .lg)
           Icon(.stop, color: .accent, size: .lg).astryxTheme(.neutral)
           Icon(.stop, color: .accent, size: .lg).astryxTheme(.butter)
