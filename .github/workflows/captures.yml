@@ -89,20 +89,31 @@ jobs:
           xcrun simctl bootstatus "$UDID" -b
           xcrun simctl status_bar "$UDID" override --time 9:41 --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4
           xcrun simctl install "$UDID" "$APP"
+          # shot <file> <launch args…>: launch, wait, screenshot; retake while the
+          # image matches the previous shot, since a slow relaunch can leave
+          # the old frame on screen.
+          last=""
+          shot() {
+            local file=$1; shift
+            for attempt in 1 2 3 4; do
+              xcrun simctl launch --terminate-running-process "$UDID" io.github.cixzhang.AstryxCaptures "$@" >/dev/null
+              sleep $((4 + attempt * 2))
+              xcrun simctl io "$UDID" screenshot "$file" >/dev/null 2>&1
+              sum=$(shasum "$file" | cut -d' ' -f1)
+              if [ "$sum" != "$last" ]; then last=$sum; return 0; fi
+              echo "retaking $file (same as the previous shot)"
+            done
+            echo "::warning::$file still matches the previous shot"
+          }
           for screen in $SCREENS; do
             for mode in light dark; do
               xcrun simctl ui "$UDID" appearance "$mode"
+              sleep 2
               for size in large ax5; do
                 args=(-screen "$screen")
                 if [ "$size" = ax5 ]; then args+=(-UIPreferredContentSizeCategoryName UICTContentSizeCategoryAccessibilityXXXL); fi
-                xcrun simctl launch --terminate-running-process "$UDID" io.github.cixzhang.AstryxCaptures "${args[@]}" >/dev/null
-                sleep 4
-                xcrun simctl io "$UDID" screenshot "$OUT/$screen-$mode-$size.png"
-                if [ "$size" = ax5 ]; then
-                  xcrun simctl launch --terminate-running-process "$UDID" io.github.cixzhang.AstryxCaptures "${args[@]}" -scrollToEnd YES >/dev/null
-                  sleep 4
-                  xcrun simctl io "$UDID" screenshot "$OUT/$screen-$mode-$size-end.png"
-                fi
+                shot "$OUT/$screen-$mode-$size.png" "${args[@]}"
+                if [ "$size" = ax5 ]; then shot "$OUT/$screen-$mode-$size-end.png" "${args[@]}" -scrollToEnd YES; fi
               done
             done
           done
