@@ -5,7 +5,7 @@ name: astryx-native-captures
 # Captures/Screens without .swift.
 on:
   push:
-    branches: [astryx-native-captures]
+    branches: [astryx-native-captures-f308]
 jobs:
   plan:
     runs-on: ubuntu-latest
