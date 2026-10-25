@@ -23,7 +23,10 @@ struct CaptureRow<Content: View>: View {
   @ViewBuilder let content: Content
   var body: some View {
     VStack(alignment: .leading, spacing: 6) {
+      // The harness's own captions stay at the default text size, so only the
+      // components grow at the largest text size and every row fits.
       SwiftUI.Text(title).font(.caption).foregroundStyle(.secondary)
+        .dynamicTypeSize(.large)
       content
     }
     .padding(.vertical, 6)

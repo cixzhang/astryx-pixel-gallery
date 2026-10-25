@@ -38,11 +38,12 @@ jobs:
           path: astryx
           sparse-checkout: packages/native/apple
       - name: Overlay files from other commits
-        # capture.env OVERLAYS: space-separated <sha>:<path> pairs, for a screen
-        # that needs views from other open changes.
+        # capture.env OVERLAYS_<Screen>: space-separated <sha>:<path> pairs, for
+        # a screen that needs views from other open changes.
         run: |
           . ./capture.env
-          for o in ${OVERLAYS:-}; do
+          eval "overlays=\${OVERLAYS_${SCREENS}:-}"
+          for o in $overlays; do
             sha=${o%%:*}; path=${o#*:}
             git -C astryx fetch -q --depth 1 origin "$sha"
             mkdir -p "astryx/$(dirname "$path")"
