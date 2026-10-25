@@ -7,11 +7,14 @@ struct CapturesApp: App {
   var body: some Scene {
     WindowGroup {
       let name = UserDefaults.standard.string(forKey: "screen") ?? ""
+      // `-scrollToEnd YES` shows the bottom of a screen taller than the display.
+      let toEnd = UserDefaults.standard.bool(forKey: "scrollToEnd")
       ScrollView {
         captureScreen(named: name)
           .frame(maxWidth: .infinity, alignment: .leading)
           .padding(16)
       }
+      .defaultScrollAnchor(toEnd ? .bottom : .top)
       .background(Color(uiColor: .systemBackground))
     }
   }
