@@ -17,6 +17,16 @@ struct ListScreen: View {
           Astryx.List(listStyle: .decimal) { ForEach(["Alpha", "Beta", "Gamma"], id: \.self) { ListItem($0) } }
         }
       }
+      CaptureRow(title: "Circle markers; selected and disabled rows") {
+        HStack(alignment: .top, spacing: 12) {
+          Astryx.List(listStyle: .circle) { ListItem("Flour"); ListItem("Sugar"); ListItem("Eggs") }
+          Astryx.List(hasDividers: true) {
+            ListItem("Wi-Fi", isSelected: true) {} onClick: {}
+            ListItem("AirDrop", isDisabled: true) {} onClick: {}
+            ListItem("Bluetooth") {} onClick: {}
+          }
+        }
+      }
       CaptureRow(title: "Nested lists count apart") {
         Astryx.List(listStyle: .decimal) {
           ListItem("Gather")
