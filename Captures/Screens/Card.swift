@@ -12,9 +12,9 @@ struct CardScreen: View {
           }
         }
       }
-      CaptureRow(title: "Variants: default muted transparent blue green orange purple") {
+      CaptureRow(title: "Variants: all 13") {
         Flow(spacing: 12) {
-          ForEach([CardVariant.default, .muted, .transparent, .blue, .green, .orange, .purple], id: \.self) { variant in
+          ForEach(CardVariant.allCases, id: \.self) { variant in
             Card(variant: variant) { Text(variant.rawValue, type: .label) }.fixedSize()
           }
         }
@@ -26,6 +26,14 @@ struct CardScreen: View {
           }
         }
         .padding(.vertical, 8)
+      }
+      CaptureRow(title: "Wire tree: a node this package cannot draw renders in place") {
+        AstryxNodeView(try! JSONDecoder().decode(AstryxNode.self, from: Data("""
+          {"component":"Card","key":"c","props":{"children":[
+            {"component":"Heading","key":"h","props":{"children":"Wire card","level":3}},
+            {"component":"Chart","key":"x","props":{}},
+            {"component":"Text","key":"t","props":{"children":"Siblings still render"}}]}}
+          """.utf8))) { _ in }
       }
       CaptureRow(title: "Content: heading and supporting text") {
         Card {

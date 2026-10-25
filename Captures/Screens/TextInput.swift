@@ -37,8 +37,10 @@ struct TextInputScreen: View {
         VStack(spacing: 8) {
           TextInput(label: "Checking", value: "astryx", isLoading: true)
           TextInput(label: "Read-only", value: "ID 12345", isReadOnly: true)
+          TextInput(label: "Read-only password", value: "hunter2", type: .password, isReadOnly: true)
           TextInput(label: "Disabled", value: "Managed", isDisabled: true, disabledMessage: "Managed by your admin")
-          TextInput(label: "Search", value: "", isLabelHidden: true, placeholder: "Search (label hidden)")
+          TextInput(label: "Search", value: "", isLabelHidden: true, description: "Hidden with the label", placeholder: "Search (label hidden, description hidden)")
+          TextInput(label: "Both notes", value: "", isOptional: true, isRequired: true)
         }
       }
     }
