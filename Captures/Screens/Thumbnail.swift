@@ -28,7 +28,7 @@ struct ThumbnailScreen: View {
           Thumbnail(src: photo, label: "c.png", onClick: {}, onRemove: {})
         }
       }
-      CaptureRow(title: "Disabled (no remove, no tap)") {
+      CaptureRow(title: "Disabled: remove and tap stay, dimmed and inert") {
         Flow(spacing: 12) {
           Thumbnail(src: photo, label: "d.png", isDisabled: true, onClick: {}, onRemove: {})
           Thumbnail(label: "e.png", isDisabled: true)
