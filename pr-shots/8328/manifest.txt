@@ -1,1 +1,1 @@
-AvatarStatusDot at df6b25e2 (#8328)
+AvatarStatusDot at 40735fc4 (#8328), right-to-left fix
