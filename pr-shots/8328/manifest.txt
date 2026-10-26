@@ -1,1 +1,1 @@
-AvatarStatusDot at 7d64e9d4 (#8328), on-error bar
+AvatarStatusDot at b9865c96 (#8328), with an Icon in the status slot
