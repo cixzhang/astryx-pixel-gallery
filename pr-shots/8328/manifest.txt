@@ -1,1 +1,1 @@
-AvatarStatusDot at b9865c96 (#8328), with an Icon in the status slot
+AvatarStatusDot at 60235fe3 (#8328), status growth capped at the avatar's
