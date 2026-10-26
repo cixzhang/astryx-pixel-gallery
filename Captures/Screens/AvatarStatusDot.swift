@@ -36,6 +36,14 @@ struct AvatarStatusDotScreen: View {
         }
         .environment(\.layoutDirection, .rightToLeft)
       }
+      CaptureRow(title: "Other status content: a labeled Icon, placed from its own size (circle, square, right to left)") {
+        Flow(spacing: 16) {
+          Avatar("Ada Lovelace", size: .lg) { Icon(.success, color: .success, size: .md, label: "Verified") }
+          Avatar("Ada Lovelace", size: .lg, shape: .square) { Icon(.success, color: .success, size: .md, label: "Verified") }
+          Avatar("Ada Lovelace", size: .lg, shape: .square) { Icon(.success, color: .success, size: .md, label: "Verified") }
+            .environment(\.layoutDirection, .rightToLeft)
+        }
+      }
       CaptureRow(title: "Themes: neutral and butter") {
         Flow(spacing: 16) {
           Avatar("Ada Lovelace", size: .lg) { AvatarStatusDot(variant: .success) }.astryxTheme(.neutral)
