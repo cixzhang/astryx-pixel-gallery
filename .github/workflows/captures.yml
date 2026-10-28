@@ -1,7 +1,7 @@
 # Capture Astryx Swift components in the iOS Simulator for review (scratch).
 name: astryx-native-captures
 # What to capture lives in capture.env: CAPTURES, space-separated
-# <screen>:<facebook/astryx commit> pairs; each screen is a file in
+# <screen>:<meta/astryx commit> pairs; each screen is a file in
 # Captures/Screens without .swift.
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
-          repository: facebook/astryx
+          repository: meta/astryx
           ref: ${{ env.REF }}
           path: astryx
           sparse-checkout: packages/native/apple
