@@ -31,6 +31,15 @@ private struct GlassSearchDemo: View {
       .navigationBarTitleDisplayMode(.inline)
       .searchable(text: $query, isPresented: $presented, placement: .toolbar, prompt: "Search artifacts")
       .searchToolbarBehavior(.minimize)
+      .toolbar {
+        // With another bottom-bar action, the minimized search shows as a glass button.
+        ToolbarItem(placement: .bottomBar) {
+          SwiftUI.Button {} label: { Image(systemName: "plus") }
+            .accessibilityLabel("New")
+        }
+        ToolbarSpacer(.flexible, placement: .bottomBar)
+        DefaultToolbarItem(kind: .search, placement: .bottomBar)
+      }
       .safeAreaInset(edge: .top) {
         VStack(alignment: .leading, spacing: 6) {
           SwiftUI.Text("Astryx: TextInput + Button (no system search)")

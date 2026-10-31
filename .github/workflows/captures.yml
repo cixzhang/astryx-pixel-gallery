@@ -103,6 +103,10 @@ jobs:
           xcrun simctl bootstatus "$UDID" -b
           xcrun simctl status_bar "$UDID" override --time 9:41 --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4
           xcrun simctl install "$UDID" "$APP"
+          # Skip the keyboard's first-run tutorial, which covers a focused field.
+          for k in DidShowContinuousPathIntroduction DidShowGestureKeyboardIntroduction; do
+            xcrun simctl spawn "$UDID" defaults write com.apple.keyboard.preferences "$k" -bool true || true
+          done
           . ./capture.env
           for screen in $SCREENS; do
             # capture.env per screen: ARGS_<Screen> extra launch arguments,
