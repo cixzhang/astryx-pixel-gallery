@@ -9,13 +9,19 @@ struct CapturesApp: App {
       let name = UserDefaults.standard.string(forKey: "screen") ?? ""
       // `-scrollToEnd YES` shows the bottom of a screen taller than the display.
       let toEnd = UserDefaults.standard.bool(forKey: "scrollToEnd")
-      ScrollView {
+      // `-fullScreen YES` gives the screen the whole window, for screens that
+      // bring their own navigation stack and scrolling.
+      if UserDefaults.standard.bool(forKey: "fullScreen") {
         captureScreen(named: name)
-          .frame(maxWidth: .infinity, alignment: .leading)
-          .padding(16)
+      } else {
+        ScrollView {
+          captureScreen(named: name)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(16)
+        }
+        .defaultScrollAnchor(toEnd ? .bottom : .top)
+        .background(Color(uiColor: .systemBackground))
       }
-      .defaultScrollAnchor(toEnd ? .bottom : .top)
-      .background(Color(uiColor: .systemBackground))
     }
   }
 }

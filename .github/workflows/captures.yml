@@ -72,7 +72,21 @@ jobs:
           brew install xcodegen
           cd Captures
           xcodegen generate
-          UDID=$(xcrun simctl create captures "iPhone 16" com.apple.CoreSimulator.SimRuntime.iOS-18-5)
+          . ../capture.env
+          # capture.env XCODE_MAJOR / RUNTIME_MAJOR: build with the newest
+          # installed Xcode of that major version and boot the newest iOS
+          # runtime of that major version (e.g. 26 for Liquid Glass).
+          RUNTIME=com.apple.CoreSimulator.SimRuntime.iOS-18-5
+          if [ -n "${XCODE_MAJOR:-}" ]; then
+            XC=$(ls -d /Applications/Xcode_${XCODE_MAJOR}*.app | sort -V | tail -1)
+            sudo xcode-select -s "$XC"; xcodebuild -version
+          fi
+          if [ -n "${RUNTIME_MAJOR:-}" ]; then
+            RUNTIME=$(xcrun simctl list runtimes -j | python3 -c "import json,sys; r=[x for x in json.load(sys.stdin)['runtimes'] if x['platform']=='iOS' and x['version'].split('.')[0]=='${RUNTIME_MAJOR}' and x.get('isAvailable')]; r.sort(key=lambda x:[int(p) for p in x['version'].split('.')]); print(r[-1]['identifier'] if r else '')")
+            if [ -z "$RUNTIME" ]; then xcodebuild -downloadPlatform iOS; RUNTIME=$(xcrun simctl list runtimes -j | python3 -c "import json,sys; r=[x for x in json.load(sys.stdin)['runtimes'] if x['platform']=='iOS' and x.get('isAvailable')]; r.sort(key=lambda x:[int(p) for p in x['version'].split('.')]); print(r[-1]['identifier'])"); fi
+          fi
+          echo "runtime: $RUNTIME"
+          UDID=$(xcrun simctl create captures "iPhone 16" "$RUNTIME")
           echo "$UDID" > ../udid.txt
           xcrun simctl boot "$UDID"
           if ! xcodebuild -project Captures.xcodeproj -scheme Captures -sdk iphonesimulator \
@@ -89,7 +103,30 @@ jobs:
           xcrun simctl bootstatus "$UDID" -b
           xcrun simctl status_bar "$UDID" override --time 9:41 --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4
           xcrun simctl install "$UDID" "$APP"
+          . ./capture.env
           for screen in $SCREENS; do
+            # capture.env per screen: ARGS_<Screen> extra launch arguments,
+            # SIZES_<Screen> (default "large ax5"), STATES_<Screen> (launched
+            # with -state <s>, one still each), VIDEO_<Screen> (a state to
+            # record as video).
+            eval "extra=\${ARGS_${screen}:-}"; eval "sizes=\${SIZES_${screen}:-large ax5}"
+            eval "states=\${STATES_${screen}:-}"; eval "video=\${VIDEO_${screen}:-}"
+            if [ -n "$states" ] || [ -n "$video" ]; then
+              for mode in light dark; do
+                xcrun simctl ui "$UDID" appearance "$mode"
+                for st in $states; do
+                  xcrun simctl launch --terminate-running-process "$UDID" io.github.cixzhang.AstryxCaptures -screen "$screen" $extra -state "$st" >/dev/null
+                  sleep 5
+                  xcrun simctl io "$UDID" screenshot "$OUT/$screen-$mode-$st.png"
+                done
+                if [ -n "$video" ]; then
+                  xcrun simctl launch --terminate-running-process "$UDID" io.github.cixzhang.AstryxCaptures -screen "$screen" $extra -state "$video" >/dev/null
+                  xcrun simctl io "$UDID" recordVideo --codec=h264 --force "$OUT/$screen-$mode-$video.mp4" & REC=$!
+                  sleep 11; kill -INT $REC; wait $REC || true
+                fi
+              done
+              continue
+            fi
             for mode in light dark; do
               xcrun simctl ui "$UDID" appearance "$mode"
               for size in large ax5; do
@@ -106,6 +143,12 @@ jobs:
               done
             done
           done
+          if ls $OUT/*.mp4 >/dev/null 2>&1; then
+            brew install ffmpeg >/dev/null
+            for v in $OUT/*.mp4; do
+              ffmpeg -loglevel error -y -i "$v" -vf "scale=-2:1280,scale=out_range=tv,format=yuv420p" -c:v libvpx-vp9 -b:v 0 -crf 36 -row-mt 1 -an "${v%.mp4}.webm"
+            done
+          fi
           { echo "astryx ref: $REF"; xcodebuild -version; xcrun simctl getenv "$UDID" SIMULATOR_RUNTIME_VERSION || true; } > $OUT/manifest.txt
           ls -la $OUT
       - uses: actions/upload-artifact@v4
