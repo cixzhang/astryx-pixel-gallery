@@ -9,8 +9,10 @@ import SwiftUI
 /// Increase Contrast on).
 struct ButtonGlassScreen: View {
   private let state = UserDefaults.standard.string(forKey: "state") ?? "unset"
+  @Environment(\.accessibilityReduceTransparency) private var reducesTransparency
+  @Environment(\.colorSchemeContrast) private var contrast
   private var variant: ButtonVariant? {
-    ButtonVariant(rawValue: state.replacingOccurrences(of: "-ic", with: ""))
+    ButtonVariant(rawValue: state.replacingOccurrences(of: "-ic", with: "").replacingOccurrences(of: "-rt", with: ""))
   }
   private var name: String { variant?.rawValue ?? "not set" }
   private static let colors: [Color] = [.blue, .orange, .green, .pink, .purple, .teal, .indigo, .red]
@@ -41,6 +43,13 @@ struct ButtonGlassScreen: View {
             }
           }
           .padding(.horizontal, 16)
+        }
+        .overlay {
+          // What the app itself reads, so a capture proves the setting.
+          SwiftUI.Text("Reduce Transparency \(reducesTransparency ? "on" : "off") · Increase Contrast \(contrast == .increased ? "on" : "off")")
+            .font(.caption.weight(.semibold))
+            .padding(.horizontal, 10).padding(.vertical, 6)
+            .background(Color(uiColor: .systemBackground), in: Capsule())
         }
         .overlay(alignment: .bottom) {
           HStack(spacing: 12) {

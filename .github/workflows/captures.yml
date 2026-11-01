@@ -122,6 +122,11 @@ jobs:
                   # A state ending in -ic runs with Increase Contrast on.
                   case "$st" in *-ic) ic=enabled ;; *) ic=disabled ;; esac
                   xcrun simctl ui "$UDID" increase_contrast "$ic" || true
+                  # A state ending in -rt runs with Reduce Transparency on.
+                  case "$st" in *-rt) rt=true ;; *) rt=false ;; esac
+                  for k in EnhancedBackgroundContrastEnabled ReduceTransparencyEnabled; do
+                    xcrun simctl spawn "$UDID" defaults write com.apple.Accessibility "$k" -bool "$rt" || true
+                  done
                   xcrun simctl launch --terminate-running-process "$UDID" io.github.cixzhang.AstryxCaptures -screen "$screen" $extra -state "$st" >/dev/null
                   sleep 5
                   xcrun simctl io "$UDID" screenshot "$OUT/$screen-$mode-$st.png"
