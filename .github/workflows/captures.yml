@@ -119,6 +119,9 @@ jobs:
               for mode in light dark; do
                 xcrun simctl ui "$UDID" appearance "$mode"
                 for st in $states; do
+                  # A state ending in -ic runs with Increase Contrast on.
+                  case "$st" in *-ic) ic=enabled ;; *) ic=disabled ;; esac
+                  xcrun simctl ui "$UDID" increase_contrast "$ic" || true
                   xcrun simctl launch --terminate-running-process "$UDID" io.github.cixzhang.AstryxCaptures -screen "$screen" $extra -state "$st" >/dev/null
                   sleep 5
                   xcrun simctl io "$UDID" screenshot "$OUT/$screen-$mode-$st.png"
