@@ -122,6 +122,9 @@ jobs:
                   # A state ending in -ic runs with Increase Contrast on.
                   case "$st" in *-ic) ic=enabled ;; *) ic=disabled ;; esac
                   xcrun simctl ui "$UDID" increase_contrast "$ic" || true
+                  # A state with -ax runs at the largest accessibility text size.
+                  case "$st" in *-ax*) cs=accessibility-extra-extra-extra-large ;; *) cs=large ;; esac
+                  xcrun simctl ui "$UDID" content_size "$cs" || true
                   # A state ending in -rt runs with Reduce Transparency on.
                   case "$st" in *-rt) rt=true ;; *) rt=false ;; esac
                   for k in EnhancedBackgroundContrastEnabled ReduceTransparencyEnabled; do

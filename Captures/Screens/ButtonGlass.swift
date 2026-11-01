@@ -11,9 +11,12 @@ struct ButtonGlassScreen: View {
   private let state = UserDefaults.standard.string(forKey: "state") ?? "unset"
   @Environment(\.accessibilityReduceTransparency) private var reducesTransparency
   @Environment(\.colorSchemeContrast) private var contrast
-  private var variant: ButtonVariant? {
-    ButtonVariant(rawValue: state.replacingOccurrences(of: "-ic", with: "").replacingOccurrences(of: "-rt", with: ""))
-  }
+  /// The state's first word is the variant; the rest are flags: ic, rt
+  /// (settings the workflow sets), ax (largest text), disabled, loading.
+  private var words: [Substring] { state.split(separator: "-") }
+  private var variant: ButtonVariant? { words.first.flatMap { ButtonVariant(rawValue: String($0)) } }
+  private var isDisabled: Bool { words.contains("disabled") }
+  private var isLoading: Bool { words.contains("loading") }
   private var name: String { variant?.rawValue ?? "not set" }
   private static let colors: [Color] = [.blue, .orange, .green, .pink, .purple, .teal, .indigo, .red]
 
@@ -46,15 +49,15 @@ struct ButtonGlassScreen: View {
         }
         .overlay {
           // What the app itself reads, so a capture proves the setting.
-          SwiftUI.Text("Reduce Transparency \(reducesTransparency ? "on" : "off") · Increase Contrast \(contrast == .increased ? "on" : "off")")
+          SwiftUI.Text("\(isDisabled ? "disabled · " : "")\(isLoading ? "loading · " : "")Reduce Transparency \(reducesTransparency ? "on" : "off") · Increase Contrast \(contrast == .increased ? "on" : "off")")
             .font(.caption.weight(.semibold))
             .padding(.horizontal, 10).padding(.vertical, 6)
             .background(Color(uiColor: .systemBackground), in: Capsule())
         }
         .overlay(alignment: .bottom) {
           HStack(spacing: 12) {
-            Astryx.Button(label: "New", variant: variant) {}
-            Astryx.Button(label: "Fill", variant: variant, width: .fill) {}
+            Astryx.Button(label: "New", variant: variant, isLoading: isLoading, isDisabled: isDisabled) {}
+            Astryx.Button(label: "Fill", variant: variant, isLoading: isLoading, isDisabled: isDisabled, width: .fill) {}
           }
           .astryxFloating()
           .padding(.horizontal, 16)
@@ -69,10 +72,10 @@ struct ButtonGlassScreen: View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .topBarTrailing) {
-          Astryx.Button(label: "Share", variant: variant) {}
+          Astryx.Button(label: "Share", variant: variant, isLoading: isLoading, isDisabled: isDisabled) {}
         }
         ToolbarItem(placement: .bottomBar) {
-          Astryx.Button(label: "Archive", variant: variant) {}
+          Astryx.Button(label: "Archive", variant: variant, isLoading: isLoading, isDisabled: isDisabled) {}
         }
       }
     }
