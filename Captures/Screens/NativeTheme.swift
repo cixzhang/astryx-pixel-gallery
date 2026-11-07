@@ -13,6 +13,17 @@ import SwiftUI
 /// - `both`: `tuned` tokens with `glass` surfaces.
 /// Launch with `-fullScreen YES -state current|glass|tuned|both`.
 struct NativeThemeScreen: View {
+  var body: some View {
+    if #available(iOS 26, *) {
+      NativeThemeContent()
+    } else {
+      SwiftUI.Text("iOS 26 only")
+    }
+  }
+}
+
+@available(iOS 26, *)
+private struct NativeThemeContent: View {
   private let state = UserDefaults.standard.string(forKey: "state") ?? "current"
   private var isGlass: Bool { state == "glass" || state == "both" }
   private var isTuned: Bool { state == "tuned" || state == "both" }
@@ -109,6 +120,7 @@ struct NativeThemeScreen: View {
   }
 }
 
+@available(iOS 26, *)
 private struct GlassSurface<Content: View>: View {
   let content: Content
   @Environment(\.astryx) private var astryx
